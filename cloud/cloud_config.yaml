@@ -1,0 +1,53 @@
+# Cloud Experiment Configuration - Updated for Fair Comparison
+
+# General Settings
+num_workers: 4
+num_samples: 10000  # Fair comparison: all approaches process 10,000 total inferences
+batch_size: 128
+num_runs: 3
+
+# Matrix Benchmarking Settings (NEW)
+matrix_worker_sizes: [1, 2, 4]  # Test different worker counts
+matrix_approaches: ["uniform", "dynamic", "sharded"]  # All three approaches
+
+# Uniform Partitioning Settings
+master_addr: "auto"  # Will be set to head node IP automatically
+master_port: "auto"  # Dynamic port assignment to avoid conflicts
+data_loader_workers: 1
+
+# Dynamic Partitioning Settings
+chunk_size: 128
+ray_address: "auto"  # Will be set to head node IP automatically
+
+# Sharded Partitioning Settings
+num_shards: 4
+dask_scheduler_address: "auto"  # Will be set to head node IP automatically
+# Auto-scalable memory management
+worker_memory_limit: "2GB"  # Increase from default for cloud instances
+worker_memory_target_fraction: 0.7
+worker_memory_spill_fraction: 0.8
+worker_memory_pause_fraction: 0.9
+# Chunked processing for memory optimization
+process_in_chunks: true
+chunk_size_processing: 1000
+
+# Output Settings
+output_dir: "results"
+plots_dir: "plots"
+logs_dir: "logs"
+matrix_dir: "matrix"  # Matrix benchmark results
+
+# Performance Settings
+timeout: 600  # Increased timeout for cloud operations
+retry_attempts: 3  # Number of retry attempts for failed operations
+
+# Memory Optimization Settings (NEW)
+# For 1 worker sharded: use maximum memory and chunked processing
+single_worker_memory_limit: "4GB"
+single_worker_chunk_size: 1000
+single_worker_batch_size: 32
+
+# For 2+ workers: standard memory configuration
+multi_worker_memory_limit: "2GB"
+multi_worker_chunk_size: 10000
+multi_worker_batch_size: 128

@@ -1,0 +1,80 @@
+# Google Cloud Platform Configuration for Data Partitioning Experiments
+# Updated for Fair Comparison and Matrix Benchmarking
+
+# GCP Project Settings
+project_id: "your-project-id"  # Replace with your GCP project ID
+zone: "us-west1-b"  # Free tier eligible zone
+
+# Cluster Configuration
+cluster_name: "data-parallel-cluster"
+network_name: "data-parallel-network"
+machine_type: "e2-micro"  # Free tier eligible
+num_workers: 3  # Number of worker nodes (plus 1 head node)
+
+# Instance Configuration
+boot_disk_size: "30GB"  # Increased for matrix benchmarking data
+boot_disk_type: "pd-standard"
+image_family: "ubuntu-2004-lts"
+image_project: "ubuntu-os-cloud"
+
+# Memory Configuration for Fair Comparison
+# e2-micro: 1 vCPU, 1 GB RAM (shared across all instances)
+# For matrix benchmarking, we need more memory
+memory_optimization: true
+swap_size: "2GB"  # Add swap for memory-intensive operations
+
+# Network Configuration
+subnet_mode: "auto"  # Automatically create subnets
+
+# Firewall Rules (Updated for Matrix Benchmarking)
+firewall_rules:
+  - name: "allow-internal"
+    description: "Allow internal communication"
+    rules: ["tcp:1-65535", "udp:1-65535", "icmp"]
+    source_ranges: ["10.128.0.0/9"]
+  
+  - name: "allow-ssh"
+    description: "Allow SSH access"
+    rules: ["tcp:22"]
+    source_ranges: ["0.0.0.0/0"]
+  
+  - name: "allow-ray"
+    description: "Allow Ray communication"
+    rules: ["tcp:6379", "tcp:8265", "tcp:10001-10100"]
+    source_ranges: ["10.128.0.0/9"]
+  
+  - name: "allow-dask"
+    description: "Allow Dask communication"
+    rules: ["tcp:8786", "tcp:8787", "tcp:8788-8790"]  # Extended range for matrix tests
+    source_ranges: ["10.128.0.0/9"]
+  
+  - name: "allow-pytorch-ddp"
+    description: "Allow PyTorch DDP communication"
+    rules: ["tcp:12000-13000"]  # Dynamic port range for matrix benchmarking
+    source_ranges: ["10.128.0.0/9"]
+
+# Matrix Benchmarking Configuration (NEW)
+matrix_benchmarking:
+  enabled: true
+  worker_sizes: [1, 2, 4]  # Test different worker counts
+  approaches: ["uniform", "dynamic", "sharded"]  # All three approaches
+  fair_comparison: true  # All approaches process 10,000 total inferences
+  
+# Memory Management for Fair Comparison (NEW)
+memory_management:
+  # For 1 worker sharded: maximum memory allocation
+  single_worker:
+    memory_limit: "4GB"
+    chunk_size: 1000
+    batch_size: 32
+    process_in_chunks: true
+  
+  # For 2+ workers: standard memory configuration
+  multi_worker:
+    memory_limit: "2GB"
+    chunk_size: 10000
+    batch_size: 128
+    process_in_chunks: false
+
+# Tags for instances
+tags: ["data-parallel-cluster", "matrix-benchmarking", "fair-comparison"]

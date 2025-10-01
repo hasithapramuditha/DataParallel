@@ -1,0 +1,17 @@
+# Local experiments configuration
+num_trials: 3
+num_samples: 1000
+batch_size: 64
+workers_to_test: [1, 2, 4]
+approaches: ["uniform", "dynamic", "sharded"]
+
+# Specific configurations for each approach
+uniform_config:
+  master_addr: "127.0.0.1"
+  master_port: 29500
+
+dynamic_config:
+  ray_address: null  # Use local Ray cluster
+
+sharded_config:
+  dask_scheduler_address: null  # Use local Dask cluster
