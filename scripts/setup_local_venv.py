@@ -43,7 +43,7 @@ def install_requirements(venv_path: str = "venv"):
     """Install requirements in the virtual environment."""
     logger.info("Installing requirements in virtual environment...")
     
-    requirements_file = Path(__file__).parent / "requirements.txt"
+    requirements_file = Path(__file__).parent.parent / "requirements.txt"
     if not requirements_file.exists():
         logger.error(f"Requirements file not found: {requirements_file}")
         return False
