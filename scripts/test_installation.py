@@ -48,7 +48,18 @@ def test_basic_functionality():
     
     try:
         # Add src to path
-        sys.path.append(str(Path(__file__).parent / 'src'))
+        sys.path.append(str(Path(__file__).parent.parent / 'src'))
+        
+        # Test new configuration system
+        from config import PartitioningConfig
+        config = PartitioningConfig({'num_workers': 1, 'num_samples': 10})
+        assert config.validate(), "Configuration validation failed"
+        print("✓ Configuration system working")
+        
+        # Test error handling system
+        from error_handling import validate_environment
+        env_results = validate_environment()
+        print(f"✓ Error handling system: {sum(env_results.values())}/{len(env_results)} checks passed")
         
         # Test utils import
         from utils import get_system_info, MetricsCollector
@@ -166,19 +177,17 @@ def test_file_structure():
     
     required_files = [
         'src/utils.py',
+        'src/config.py',
+        'src/error_handling.py',
         'src/approaches/uniform_partitioning.py',
         'src/approaches/dynamic_partitioning.py',
         'src/approaches/sharded_partitioning.py',
-        'src/benchmark.py',
-        'local/run_local_experiments.py',
-        'local/config.yaml',
+        'src/matrix_benchmark.py',
         'cloud/setup_gcp_cluster.py',
         'cloud/run_cloud_experiments.py',
         'cloud/gcp_config.yaml',
         'cloud/cloud_config.yaml',
         'scripts/setup_local_venv.py',
-        'examples/demo_all_approaches.py',
-        'docs/QUICK_START.md',
         'main.py',
         'run.sh',
         'run.bat',

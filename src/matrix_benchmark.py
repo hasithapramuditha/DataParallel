@@ -15,6 +15,7 @@ sys.path.append(str(Path(__file__).parent))
 from approaches.uniform_partitioning import run_uniform_partitioning
 from approaches.dynamic_partitioning import run_dynamic_partitioning
 from approaches.sharded_partitioning import run_sharded_partitioning
+from config import PartitioningConfig
 
 
 def ensure_dirs():
@@ -26,74 +27,70 @@ def ensure_dirs():
 
 def run_case(approach: str, workers: int, num_samples: int, batch_size: int) -> dict:
     # For fair comparison, all approaches should process the same total workload
-    # Uniform partitioning uses full CIFAR-10 dataset (10,000 samples) by default
-    # Dynamic and Sharded should also use 10,000 samples for fair comparison
+    # Use standardized configuration system
+    
+    # Create base configuration with randomized port to avoid conflicts
+    base_config = PartitioningConfig({
+        'num_workers': workers,
+        'num_samples': num_samples,
+        'batch_size': batch_size,
+        'chunk_size': batch_size,
+        'num_shards': workers,
+        'master_port': str(12000 + (os.getpid() % 1000) + workers)
+    })
     
     if approach == 'uniform':
-        cfg = {
-            'world_size': workers,
-            'batch_size': batch_size,
-            'num_workers': 1,
-            'master_addr': 'localhost',
-            # randomize port to avoid EADDRINUSE when rerun
-            'master_port': str(12000 + (os.getpid() % 1000) + workers)
-        }
+        cfg = base_config.get_uniform_config()
         res = run_uniform_partitioning(cfg)
         # new return format: {'aggregate':..., 'nodewise':[...]}
         if 'aggregate' not in res:
             # backward compat
             res = {'aggregate': res, 'nodewise': []}
         return res
-    if approach == 'dynamic':
-        # Use 10,000 samples to match uniform partitioning
-        cfg = {
-            'num_workers': workers,
-            'num_samples': 10000,  # Match uniform partitioning (10,000 samples)
-            'chunk_size': batch_size,
-            'ray_address': None
-        }
+    elif approach == 'dynamic':
+        cfg = base_config.get_dynamic_config()
         res = run_dynamic_partitioning(cfg)
         return {'aggregate': res, 'nodewise': res.get('nodewise', [])}
-    if approach == 'sharded':
-        # For fair comparison, all approaches must process the same total workload
-        # Use 10,000 samples for all approaches, but configure Dask with auto-scalable memory
+    elif approach == 'sharded':
+        # Use multiprocessing-based sharded partitioning (no Dask configuration needed)
+        sharded_config = base_config.get_sharded_config()
+        # Remove Dask-specific parameters that are no longer used
+        sharded_config = {k: v for k, v in sharded_config.items() 
+                         if not k.startswith('worker_memory_') and k != 'dask_scheduler_address'}
+        
+        # Configure chunking based on worker count for optimal performance
         if workers == 1:
-            # Special configuration for 1 worker with maximum memory allocation
-            cfg = {
-                'num_workers': workers,
-                'num_samples': 10000,  # Same as uniform and dynamic for fair comparison
-                'num_shards': workers,
-                'dask_scheduler_address': None,
-                'batch_size': 32,  # Smaller batch size for 1 worker
-                # Maximum memory configuration for 1 worker
-                'worker_memory_limit': '4GB',  # Maximum memory for 1 worker
-                'worker_memory_target_fraction': 0.5,  # Conservative memory usage
-                'worker_memory_spill_fraction': 0.6,  # Early spill to disk
-                'worker_memory_pause_fraction': 0.7,  # Early pause
-                'enable_auto_scaling': True,  # Enable auto-scaling
-                'process_in_chunks': True,  # Process data in smaller chunks
-                'chunk_size': 1000  # Process 1000 samples at a time
-            }
+            sharded_config.update({
+                'process_in_chunks': True,
+                'chunk_size': 1000  # Smaller chunks for single worker
+            })
         else:
-            # Standard configuration for 2+ workers
-            cfg = {
-                'num_workers': workers,
-                'num_samples': 10000,  # Same as uniform and dynamic for fair comparison
-                'num_shards': workers,
-                'dask_scheduler_address': None,
-                'batch_size': batch_size,
-                # Configure Dask with more memory per worker to handle 10,000 samples
-                'worker_memory_limit': '2GB',  # Increase from default 0.93GB
-                'worker_memory_target_fraction': 0.7,  # Use 70% of available memory
-                'worker_memory_spill_fraction': 0.8,  # Spill to disk at 80%
-                'worker_memory_pause_fraction': 0.9,  # Pause at 90%
-                'enable_auto_scaling': True,  # Enable auto-scaling
-                'process_in_chunks': False,  # No chunking needed for 2+ workers
-                'chunk_size': 10000  # Process all samples at once
-            }
-        res = run_sharded_partitioning(cfg)
-        return {'aggregate': res, 'nodewise': res.get('nodewise', [])}
-    raise ValueError('Unknown approach')
+            sharded_config.update({
+                'process_in_chunks': True,
+                'chunk_size': 500   # Moderate chunks for multiple workers
+            })
+        
+        res = run_sharded_partitioning(sharded_config)
+        # Convert flat result to expected format with aggregate and nodewise
+        aggregate = {
+            'throughput': res['throughput'],
+            'latency_ms': (res['total_duration'] * 1000) / res['total_inferences'] if res['total_inferences'] > 0 else 0,
+            'avg_cpu_percent': res['avg_cpu_percent'],
+            'avg_memory_mb': res['avg_memory_mb']
+        }
+        # Convert worker results to nodewise format
+        nodewise = []
+        for worker_result in res.get('worker_results', []):
+            nodewise.append({
+                'worker_id': worker_result['worker_id'],
+                'throughput': worker_result['throughput'],
+                'latency_ms': (worker_result['inference_time'] * 1000) / worker_result['total_inferences'] if worker_result['total_inferences'] > 0 else 0,
+                'avg_cpu_percent': worker_result['avg_cpu_percent'],
+                'avg_memory_mb': worker_result['avg_memory_mb']
+            })
+        return {'aggregate': aggregate, 'nodewise': nodewise}
+    else:
+        raise ValueError(f"Unknown approach: {approach}")
 
 
 def to_rows(approach: str, workers: int, bundle: dict):

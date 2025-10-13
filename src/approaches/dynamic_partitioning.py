@@ -13,6 +13,7 @@ import os
 import sys
 import argparse
 import logging
+import traceback
 from typing import Dict, Any, List
 from concurrent.futures import ThreadPoolExecutor
 
@@ -22,6 +23,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 # Import with error handling for Ray workers
 try:
     from utils import get_model, get_raw_data, split_data_dynamic, MetricsCollector
+    from error_handling import retry_on_failure, RetryConfig, ErrorRecoveryManager, safe_execute
 except ImportError:
     # For Ray workers, we'll define the functions locally
     import torchvision
@@ -188,6 +190,7 @@ class DynamicPartitioningManager:
         self.config = config
         self.actors = []
         self.metrics = MetricsCollector()
+        self.error_recovery = ErrorRecoveryManager()
         
     def initialize_ray(self):
         """Initialize Ray cluster."""
@@ -218,21 +221,10 @@ class DynamicPartitioningManager:
         logger.info(f"Loaded {len(data)} samples")
         return data
     
-    def create_initial_chunks(self, data: List[np.ndarray]) -> List[List[np.ndarray]]:
-        """Create initial data chunks for distribution."""
-        chunk_size = self.config['chunk_size']
-        chunks = []
-        
-        for i in range(0, len(data), chunk_size):
-            chunk = data[i:i + chunk_size]
-            chunks.append(chunk)
-        
-        logger.info(f"Created {len(chunks)} chunks of size {chunk_size}")
-        return chunks
     
     def run_dynamic_inference(self, data: List[np.ndarray]) -> Dict[str, float]:
         """
-        Run dynamic inference with load balancing.
+        Run dynamic inference with true load balancing.
         
         Args:
             data: List of data samples
@@ -240,43 +232,91 @@ class DynamicPartitioningManager:
         Returns:
             Dictionary containing performance metrics
         """
-        # Create initial chunks
-        chunks = self.create_initial_chunks(data)
+        # Create smaller chunks for better load balancing
+        chunk_size = self.config.get('chunk_size', 32)  # Smaller chunks for better balancing
+        chunks = []
+        
+        for i in range(0, len(data), chunk_size):
+            chunk = data[i:i + chunk_size]
+            chunks.append(chunk)
+        
+        logger.info(f"Created {len(chunks)} chunks of size {chunk_size} for dynamic load balancing")
         
         # Start timing
         self.metrics.start_timing()
         
-        # Submit all chunks to actors (Ray handles load balancing)
-        futures = []
-        for chunk in chunks:
-            # Round-robin assignment with Ray's load balancing
-            actor = self.actors[len(futures) % len(self.actors)]
-            future = actor.infer_batch.remote(chunk)
-            futures.append(future)
-        
-        logger.info(f"Submitted {len(futures)} inference tasks")
-        
-        # Collect results as they complete
+        # Dynamic load balancing: submit tasks and reassign based on actor performance
+        pending_tasks = {}  # actor_id -> list of futures
         completed_tasks = 0
         total_inferences = 0
         actor_stats = []
+        actor_performance = {}  # Track actor performance for load balancing
         
-        # Use Ray's wait to get results as they complete
-        while futures:
-            ready, futures = ray.wait(futures, timeout=1.0)
+        # Initialize actor performance tracking
+        for actor in self.actors:
+            actor_performance[actor] = {'pending_tasks': 0, 'completed_tasks': 0, 'avg_inference_time': 0}
+            pending_tasks[actor] = []
+        
+        # Submit initial tasks to all actors
+        for i, chunk in enumerate(chunks):
+            # Find actor with least pending tasks and best performance
+            best_actor = min(self.actors, key=lambda a: (
+                actor_performance[a]['pending_tasks'],
+                actor_performance[a]['avg_inference_time']
+            ))
             
-            for future in ready:
-                try:
-                    result = ray.get(future)
-                    total_inferences += result['batch_size']
-                    actor_stats.append(result)
-                    completed_tasks += 1
+            future = best_actor.infer_batch.remote(chunk)
+            pending_tasks[best_actor].append(future)
+            actor_performance[best_actor]['pending_tasks'] += 1
+        
+        logger.info(f"Submitted {len(chunks)} inference tasks with dynamic load balancing")
+        
+        # Process results and dynamically reassign tasks
+        while any(pending_tasks.values()):
+            # Check for completed tasks
+            for actor, futures in pending_tasks.items():
+                if not futures:
+                    continue
                     
-                    if completed_tasks % 10 == 0:
-                        logger.info(f"Completed {completed_tasks}/{len(chunks)} tasks")
+                # Use Ray's wait to check for completed tasks
+                ready, remaining = ray.wait(futures, timeout=0.1, num_returns=1)
+                
+                for future in ready:
+                    result, error = safe_execute(ray.get, future)
+                    
+                    if error is None and result is not None:
+                        total_inferences += result['batch_size']
+                        actor_stats.append(result)
+                        completed_tasks += 1
                         
-                except Exception as e:
-                    logger.error(f"Task failed: {str(e)}")
+                        # Update actor performance
+                        actor_performance[actor]['pending_tasks'] -= 1
+                        actor_performance[actor]['completed_tasks'] += 1
+                        
+                        # Update average inference time (exponential moving average)
+                        alpha = 0.1
+                        if actor_performance[actor]['avg_inference_time'] == 0:
+                            actor_performance[actor]['avg_inference_time'] = result['inference_time']
+                        else:
+                            actor_performance[actor]['avg_inference_time'] = (
+                                alpha * result['inference_time'] + 
+                                (1 - alpha) * actor_performance[actor]['avg_inference_time']
+                            )
+                        
+                        if completed_tasks % 10 == 0:
+                            logger.info(f"Completed {completed_tasks}/{len(chunks)} tasks")
+                    else:
+                        logger.error(f"Task failed: {str(error)}")
+                        actor_performance[actor]['pending_tasks'] -= 1
+                        
+                        # Attempt error recovery
+                        if error and self.error_recovery.recover_from_error(error, {'actor': actor}):
+                            logger.info("Error recovery successful, continuing...")
+                        else:
+                            logger.warning("Error recovery failed or not applicable")
+                
+                # Update pending tasks list
+                pending_tasks[actor] = remaining
         
         # Stop timing
         self.metrics.stop_timing()
@@ -300,7 +340,8 @@ class DynamicPartitioningManager:
             'avg_memory_mb': avg_memory,
             'total_inference_time': total_inference_time,
             'completed_tasks': completed_tasks,
-            'num_actors': len(self.actors)
+            'num_actors': len(self.actors),
+            'load_balancing_efficiency': self._calculate_load_balancing_efficiency(actor_performance)
         })
         
         # include nodewise metrics per actor
@@ -318,6 +359,27 @@ class DynamicPartitioningManager:
         metrics['nodewise'] = nodewise
         return metrics
     
+    def _calculate_load_balancing_efficiency(self, actor_performance: Dict) -> float:
+        """Calculate load balancing efficiency based on task distribution."""
+        if not actor_performance:
+            return 0.0
+        
+        completed_tasks = [perf['completed_tasks'] for perf in actor_performance.values()]
+        if not completed_tasks:
+            return 0.0
+        
+        # Calculate coefficient of variation (lower is better)
+        mean_tasks = np.mean(completed_tasks)
+        std_tasks = np.std(completed_tasks)
+        
+        if mean_tasks == 0:
+            return 0.0
+        
+        cv = std_tasks / mean_tasks
+        # Convert to efficiency score (0-1, higher is better)
+        efficiency = max(0, 1 - cv)
+        return efficiency
+    
     def get_actor_statistics(self) -> List[Dict[str, Any]]:
         """Get statistics from all actors."""
         stats_futures = [actor.get_stats.remote() for actor in self.actors]
@@ -327,9 +389,10 @@ class DynamicPartitioningManager:
         """Clean up Ray resources."""
         ray.shutdown()
 
+@retry_on_failure(RetryConfig(max_retries=2, base_delay=5.0))
 def run_dynamic_partitioning(config: Dict[str, Any]) -> Dict[str, float]:
     """
-    Run dynamic partitioning benchmark.
+    Run dynamic partitioning benchmark with error handling and recovery.
     
     Args:
         config: Configuration dictionary
@@ -340,6 +403,10 @@ def run_dynamic_partitioning(config: Dict[str, Any]) -> Dict[str, float]:
     manager = DynamicPartitioningManager(config)
     
     try:
+        # Log system information for debugging
+        from error_handling import log_system_info
+        log_system_info()
+        
         # Initialize Ray
         manager.initialize_ray()
         
@@ -363,7 +430,14 @@ def run_dynamic_partitioning(config: Dict[str, Any]) -> Dict[str, float]:
         
     except Exception as e:
         logger.error(f"Dynamic partitioning failed: {str(e)}")
-        raise
+        logger.debug(f"Traceback: {traceback.format_exc()}")
+        
+        # Attempt error recovery
+        if manager.error_recovery.recover_from_error(e, {'config': config}):
+            logger.info("Error recovery successful, retrying...")
+            raise  # This will trigger the retry decorator
+        else:
+            raise
     finally:
         manager.cleanup()
 

@@ -1,0 +1,54 @@
+{
+  "best_throughput": {
+    "1": {
+      "strategy": "uniform",
+      "throughput": 377.4823911155176
+    },
+    "2": {
+      "strategy": "uniform",
+      "throughput": 364.7829350364286
+    }
+  },
+  "best_efficiency": {},
+  "scaling_analysis": {
+    "uniform": {
+      "scaling_efficiency": 0.48317874372687936,
+      "scaling_data": [
+        {
+          "nodes": 1,
+          "throughput": 377.4823911155176
+        },
+        {
+          "nodes": 2,
+          "throughput": 364.7829350364286
+        }
+      ]
+    },
+    "dynamic": {
+      "scaling_efficiency": 0.8814547783535152,
+      "scaling_data": [
+        {
+          "nodes": 1,
+          "throughput": 116.54467937630852
+        },
+        {
+          "nodes": 2,
+          "throughput": 205.45772905585105
+        }
+      ]
+    },
+    "sharded": {
+      "scaling_efficiency": 0.5480176174405545,
+      "scaling_data": [
+        {
+          "nodes": 1,
+          "throughput": 151.00043135992993
+        },
+        {
+          "nodes": 2,
+          "throughput": 165.5017932527296
+        }
+      ]
+    }
+  }
+}

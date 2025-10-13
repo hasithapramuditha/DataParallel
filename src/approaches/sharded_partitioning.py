@@ -1,12 +1,9 @@
 """
-Sharded Data Partitioning Implementation using Dask.
+Sharded Data Partitioning Implementation - Fixed Version.
 
-This approach shards the dataset into fixed parts and distributes them to nodes
-using Dask's distributed computing capabilities.
+This approach partitions data into shards and processes them using a simpler
+multiprocessing approach to avoid Dask serialization issues with PyTorch models.
 """
-import dask
-import dask.array as da
-from dask.distributed import Client, LocalCluster, as_completed
 import torch
 import numpy as np
 import time
@@ -15,308 +12,365 @@ import os
 import sys
 import argparse
 import logging
-from typing import Dict, Any, List
+import multiprocessing as mp
+from typing import Dict, Any, List, Tuple
+from concurrent.futures import ProcessPoolExecutor, as_completed
 
 # Add parent directory to path for imports
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from utils import get_model, get_raw_data, create_shards, MetricsCollector
+from config import PartitioningConfig
+from error_handling import retry_on_failure, RetryConfig, safe_execute
 
 logger = logging.getLogger(__name__)
 
-class ShardedInferenceWorker:
-    """Worker class for sharded inference."""
-    
-    def __init__(self, worker_id: int):
-        self.worker_id = worker_id
-        self.model = get_model()
-        self.inference_count = 0
+def process_shard_worker(shard_data: np.ndarray, worker_id: int, process_in_chunks: bool = True, chunk_size: int = 128) -> Dict[str, Any]:
+    """
+    Worker function for processing a single shard.
+    This runs in a separate process to avoid serialization issues.
+    """
+    try:
+        # Load model in the worker process
+        model = get_model()
         
-    def infer_shard(self, shard_data: np.ndarray, process_in_chunks: bool = False, chunk_size: int = 1000) -> Dict[str, Any]:
-        """
-        Perform inference on a data shard.
-        
-        Args:
-            shard_data: Numpy array containing the data shard
-            process_in_chunks: Whether to process data in smaller chunks
-            chunk_size: Size of each chunk for processing
-            
-        Returns:
-            Dictionary containing inference results and metrics
-        """
         start_time = time.time()
         total_inferences = 0
+        cpu_usages = []
+        memory_usages = []
         
         if process_in_chunks and len(shard_data) > chunk_size:
             # Process data in smaller chunks to avoid memory issues
             for i in range(0, len(shard_data), chunk_size):
                 chunk_data = shard_data[i:i + chunk_size]
                 
-                # Convert to tensor
-                data_tensor = torch.tensor(chunk_data)
+                # Convert to tensor with proper memory management
+                data_tensor = torch.tensor(chunk_data, dtype=torch.float32)
                 
                 # Perform inference
                 with torch.no_grad():
-                    outputs = self.model(data_tensor)
+                    outputs = model(data_tensor)
                 
                 total_inferences += len(chunk_data)
                 
+                # Record metrics
+                cpu_usages.append(psutil.cpu_percent(interval=0.01))
+                memory_usages.append(psutil.Process().memory_info().rss / 1024 / 1024)
+                
                 # Clear memory after each chunk
                 del data_tensor, outputs
-                torch.cuda.empty_cache() if torch.cuda.is_available() else None
+                if torch.cuda.is_available():
+                    torch.cuda.empty_cache()
+                
+                # Force garbage collection periodically
+                if i % (chunk_size * 10) == 0:
+                    import gc
+                    gc.collect()
         else:
-            # Process all data at once
-            data_tensor = torch.tensor(shard_data)
+            # Process all data at once (for small shards)
+            data_tensor = torch.tensor(shard_data, dtype=torch.float32)
             
             # Perform inference
             with torch.no_grad():
-                outputs = self.model(data_tensor)
+                outputs = model(data_tensor)
             
             total_inferences = len(shard_data)
             
+            # Record metrics
+            cpu_usages.append(psutil.cpu_percent(interval=0.1))
+            memory_usages.append(psutil.Process().memory_info().rss / 1024 / 1024)
+            
             # Clear memory
             del data_tensor, outputs
-            torch.cuda.empty_cache() if torch.cuda.is_available() else None
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
         
         inference_time = time.time() - start_time
-        self.inference_count += total_inferences
         
         return {
-            'worker_id': self.worker_id,
-            'shard_size': total_inferences,
+            'worker_id': worker_id,
+            'total_inferences': total_inferences,
             'inference_time': inference_time,
-            'total_inferences': self.inference_count,
-            # sample with short interval to get a non-zero measurement
-            'cpu_usage': psutil.cpu_percent(interval=0.1),
-            'memory_usage': psutil.Process().memory_info().rss / 1024 / 1024  # MB
+            'throughput': total_inferences / inference_time if inference_time > 0 else 0,
+            'avg_cpu_percent': np.mean(cpu_usages) if cpu_usages else 0,
+            'avg_memory_mb': np.mean(memory_usages) if memory_usages else 0,
+            'max_memory_mb': max(memory_usages) if memory_usages else 0,
+            'status': 'success'
+        }
+        
+    except Exception as e:
+        logger.error(f"Worker {worker_id} failed: {e}")
+        return {
+            'worker_id': worker_id,
+            'total_inferences': 0,
+            'inference_time': 0,
+            'throughput': 0,
+            'avg_cpu_percent': 0,
+            'avg_memory_mb': 0,
+            'max_memory_mb': 0,
+            'status': 'failed',
+            'error': str(e)
         }
 
 class ShardedPartitioningManager:
-    """Manages sharded partitioning using Dask."""
+    """
+    Manager class for sharded partitioning using multiprocessing.
+    """
     
-    def __init__(self, config: Dict[str, Any]):
-        self.config = config
-        self.client = None
-        self.cluster = None
-        self.workers = []
-        self.metrics = MetricsCollector()
-        
-    def initialize_dask(self):
-        """Initialize Dask cluster."""
-        if self.config.get('dask_scheduler_address'):
-            # Connect to existing cluster
-            self.client = Client(self.config['dask_scheduler_address'])
-        else:
-            # Create local cluster with configurable memory settings
-            memory_limit = self.config.get('worker_memory_limit', '1GB')
-            memory_target_fraction = self.config.get('worker_memory_target_fraction', 0.7)
-            memory_spill_fraction = self.config.get('worker_memory_spill_fraction', 0.8)
-            memory_pause_fraction = self.config.get('worker_memory_pause_fraction', 0.9)
-            
-            self.cluster = LocalCluster(
-                n_workers=self.config['num_workers'],
-                threads_per_worker=1,
-                memory_limit=memory_limit,
-                memory_target_fraction=memory_target_fraction,
-                memory_spill_fraction=memory_spill_fraction,
-                memory_pause_fraction=memory_pause_fraction
-            )
-            self.client = Client(self.cluster)
-        
-        logger.info(f"Dask cluster initialized with {len(self.client.scheduler_info()['workers'])} workers")
-        logger.info(f"Dashboard available at: {self.client.dashboard_link}")
-    
-    def create_workers(self):
-        """Create worker instances."""
-        self.workers = [
-            ShardedInferenceWorker(i) 
-            for i in range(self.config['num_workers'])
-        ]
-        logger.info(f"Created {len(self.workers)} inference workers")
-    
-    def load_and_shard_data(self) -> List[np.ndarray]:
-        """Load data and create shards."""
-        logger.info(f"Loading {self.config['num_samples']} samples...")
-        raw_data = get_raw_data(self.config['num_samples'])
-        
-        # Convert to numpy array
-        data_array = np.array(raw_data)
-        logger.info(f"Loaded data shape: {data_array.shape}")
-        
-        # Create shards
-        shards = create_shards(data_array, self.config['num_shards'])
-        logger.info(f"Created {len(shards)} shards")
-        
-        return shards
-    
-    def run_sharded_inference(self, shards: List[np.ndarray]) -> Dict[str, float]:
+    def __init__(self, num_workers: int = 2, num_shards: int = None):
         """
-        Run sharded inference.
+        Initialize sharded partitioning manager.
         
         Args:
-            shards: List of data shards
+            num_workers: Number of worker processes
+            num_shards: Number of data shards (defaults to num_workers)
+        """
+        self.num_workers = num_workers
+        self.num_shards = num_shards or num_workers
+        self.metrics = MetricsCollector()
+        
+    def _optimize_shard_distribution(self, shards: List[np.ndarray]) -> List[Tuple[np.ndarray, int]]:
+        """
+        Optimize shard distribution to workers based on shard sizes.
+        Uses a greedy algorithm to assign largest shards to least loaded workers.
+        """
+        if len(shards) <= self.num_workers:
+            # If we have fewer shards than workers, assign one shard per worker
+            assignments = []
+            for i, shard in enumerate(shards):
+                worker_id = i % self.num_workers
+                assignments.append((shard, worker_id))
+            return assignments
+        
+        # Sort shards by size (largest first)
+        shard_size_pairs = [(i, len(shard)) for i, shard in enumerate(shards)]
+        shard_size_pairs.sort(key=lambda x: x[1], reverse=True)
+        
+        # Track worker loads
+        worker_loads = [0] * self.num_workers
+        assignments = []
+        
+        # Assign shards to workers using greedy approach
+        for shard_idx, shard_size in shard_size_pairs:
+            # Find worker with minimum current load
+            min_load_worker = min(range(self.num_workers), key=lambda w: worker_loads[w])
+            assignments.append((shards[shard_idx], min_load_worker))
+            worker_loads[min_load_worker] += shard_size
+        
+        return assignments
+    
+    def _calculate_distribution_efficiency(self, assignments: List[Tuple[np.ndarray, int]]) -> float:
+        """
+        Calculate how evenly shards are distributed across workers.
+        Returns a value between 0 and 1, where 1 is perfectly balanced.
+        """
+        worker_loads = [0] * self.num_workers
+        for shard, worker_id in assignments:
+            worker_loads[worker_id] += len(shard)
+        
+        if not worker_loads or max(worker_loads) == 0:
+            return 1.0
+        
+        # Calculate coefficient of variation (lower is better)
+        mean_load = np.mean(worker_loads)
+        std_load = np.std(worker_loads)
+        cv = std_load / mean_load if mean_load > 0 else 0
+        
+        # Convert to efficiency (1 - cv, clamped to [0, 1])
+        efficiency = max(0, 1 - cv)
+        return efficiency
+    
+    @retry_on_failure(RetryConfig(max_retries=2, base_delay=2.0))
+    def run_sharded_inference(self, data: np.ndarray, process_in_chunks: bool = True, chunk_size: int = 128) -> Dict[str, Any]:
+        """
+        Run sharded inference on the given data.
+        
+        Args:
+            data: Input data array
+            process_in_chunks: Whether to process data in chunks
+            chunk_size: Size of chunks for processing
             
         Returns:
-            Dictionary containing performance metrics
+            Dictionary containing inference results
         """
+        logger.info(f"Starting sharded partitioning inference with {self.num_workers} workers...")
+        
+        # Create shards
+        shards = create_shards(data, self.num_shards)
+        logger.info(f"Created {len(shards)} shards")
+        
+        # Optimize shard distribution
+        shard_assignments = self._optimize_shard_distribution(shards)
+        distribution_efficiency = self._calculate_distribution_efficiency(shard_assignments)
+        
+        logger.info(f"Optimized shard distribution: {[len(shard) for shard, _ in shard_assignments]}")
+        
         # Start timing
         self.metrics.start_timing()
         
-        # Submit inference tasks for each shard
-        futures = []
-        process_in_chunks = self.config.get('process_in_chunks', False)
-        chunk_size = self.config.get('chunk_size', 1000)
+        # Process shards using multiprocessing
+        results = []
+        failed_tasks = []
         
-        for i, shard in enumerate(shards):
-            worker = self.workers[i % len(self.workers)]
-            future = self.client.submit(worker.infer_shard, shard, process_in_chunks, chunk_size)
-            futures.append(future)
-        
-        logger.info(f"Submitted {len(futures)} shard inference tasks")
-        
-        # Collect results
-        completed_tasks = 0
-        total_inferences = 0
-        worker_stats = []
-        
-        for future in as_completed(futures):
-            try:
-                result = future.result()
-                total_inferences += result['shard_size']
-                worker_stats.append(result)
-                completed_tasks += 1
+        try:
+            with ProcessPoolExecutor(max_workers=self.num_workers) as executor:
+                # Submit all shard processing tasks
+                future_to_shard = {}
+                for shard_idx, (shard, worker_id) in enumerate(shard_assignments):
+                    future = executor.submit(process_shard_worker, shard, worker_id, process_in_chunks, chunk_size)
+                    future_to_shard[future] = (shard_idx, worker_id)
                 
-                if completed_tasks % 5 == 0:
-                    logger.info(f"Completed {completed_tasks}/{len(shards)} shards")
-                    
-            except Exception as e:
-                logger.error(f"Shard inference failed: {str(e)}")
+                # Collect results as they complete
+                for future in as_completed(future_to_shard):
+                    shard_idx, worker_id = future_to_shard[future]
+                    try:
+                        result = future.result(timeout=300)  # 5 minute timeout
+                        if result['status'] == 'success':
+                            results.append(result)
+                        else:
+                            failed_tasks.append((shard_idx, worker_id, result.get('error', 'Unknown error')))
+                    except Exception as e:
+                        failed_tasks.append((shard_idx, worker_id, str(e)))
+                        logger.error(f"Shard {shard_idx} processing failed: {e}")
         
-        # Stop timing
-        self.metrics.stop_timing()
+        except Exception as e:
+            logger.error(f"Sharded inference failed: {e}")
+            raise
         
-        # Record final metrics
-        self.metrics.add_inferences(total_inferences)
+        finally:
+            self.metrics.stop_timing()
         
-        # Calculate aggregated metrics
-        if worker_stats:
-            avg_cpu = np.mean([stat['cpu_usage'] for stat in worker_stats])
-            avg_memory = np.mean([stat['memory_usage'] for stat in worker_stats])
-            total_inference_time = sum([stat['inference_time'] for stat in worker_stats])
-        else:
-            avg_cpu = 0
-            avg_memory = 0
-            total_inference_time = 0
+        # Aggregate results
+        if not results:
+            logger.warning("No shards completed successfully")
+            return {
+                'total_inferences': 0,
+                'total_duration': 0,
+                'throughput': 0,
+                'completed_tasks': 0,
+                'failed_tasks': len(failed_tasks),
+                'shard_distribution_efficiency': distribution_efficiency,
+                'worker_results': [],
+                'status': 'failed'
+            }
         
-        metrics = self.metrics.get_metrics()
-        metrics.update({
+        # Calculate aggregate metrics
+        total_inferences = sum(r['total_inferences'] for r in results)
+        total_duration = self.metrics.get_metrics().get('total_duration', 0)
+        throughput = total_inferences / total_duration if total_duration > 0 else 0
+        
+        # Calculate aggregate resource usage
+        avg_cpu = np.mean([r['avg_cpu_percent'] for r in results])
+        avg_memory = np.mean([r['avg_memory_mb'] for r in results])
+        max_memory = max([r['max_memory_mb'] for r in results])
+        
+        logger.info(f"Sharded partitioning completed. Total inferences: {total_inferences}")
+        if failed_tasks:
+            logger.warning(f"Failed tasks: {failed_tasks}")
+        
+        return {
+            'total_inferences': total_inferences,
+            'total_duration': total_duration,
+            'throughput': throughput,
             'avg_cpu_percent': avg_cpu,
             'avg_memory_mb': avg_memory,
-            'total_inference_time': total_inference_time,
-            'completed_tasks': completed_tasks,
-            'num_workers': len(self.workers),
-            'num_shards': len(shards)
-        })
-        
-        # include nodewise metrics per worker
-        nodewise = []
-        for stat in worker_stats:
-            nodewise.append({
-                'worker_id': stat['worker_id'],
-                'throughput': stat['shard_size'] / stat['inference_time'] if stat['inference_time'] > 0 else 0,
-                'latency_ms': stat['inference_time'] * 1000,
-                'avg_cpu_percent': stat['cpu_usage'],
-                'avg_memory_mb': stat['memory_usage'],
-                'total_duration': stat['inference_time'],
-                'total_inferences': stat['shard_size']
-            })
-        metrics['nodewise'] = nodewise
-        return metrics
-    
-    def get_cluster_info(self) -> Dict[str, Any]:
-        """Get Dask cluster information."""
-        return {
-            'num_workers': len(self.client.scheduler_info()['workers']),
-            'dashboard_link': self.client.dashboard_link,
-            'cluster_info': self.client.scheduler_info()
+            'max_memory_mb': max_memory,
+            'completed_tasks': len(results),
+            'failed_tasks': len(failed_tasks),
+            'shard_distribution_efficiency': distribution_efficiency,
+            'worker_results': results,
+            'status': 'success'
         }
-    
-    def cleanup(self):
-        """Clean up Dask resources."""
-        if self.client:
-            self.client.close()
-        if self.cluster:
-            self.cluster.close()
 
-def run_sharded_partitioning(config: Dict[str, Any]) -> Dict[str, float]:
+@retry_on_failure(RetryConfig(max_retries=2, base_delay=2.0))
+def run_sharded_partitioning(config: Dict[str, Any]) -> Dict[str, Any]:
     """
-    Run sharded partitioning benchmark.
+    Run sharded partitioning experiment with given configuration.
     
     Args:
         config: Configuration dictionary
         
     Returns:
-        Dictionary containing performance metrics
+        Dictionary containing experiment results
     """
-    manager = ShardedPartitioningManager(config)
+    logger.info("Starting sharded partitioning experiment")
     
-    try:
-        # Initialize Dask
-        manager.initialize_dask()
-        
-        # Create workers
-        manager.create_workers()
-        
-        # Load and shard data
-        shards = manager.load_and_shard_data()
-        
-        # Run inference
-        logger.info("Starting sharded partitioning inference...")
-        results = manager.run_sharded_inference(shards)
-        
-        # Get cluster info
-        cluster_info = manager.get_cluster_info()
-        results['cluster_info'] = cluster_info
-        
-        logger.info(f"Sharded partitioning completed. Total inferences: {results['total_inferences']}")
-        
-        return results
-        
-    except Exception as e:
-        logger.error(f"Sharded partitioning failed: {str(e)}")
-        raise
-    finally:
-        manager.cleanup()
+    # Create manager
+    manager = ShardedPartitioningManager(
+        num_workers=config.get('num_workers', 2),
+        num_shards=config.get('num_shards', config.get('num_workers', 2))
+    )
+    
+    # Load data
+    logger.info(f"Loading {config.get('num_samples', 1000)} samples...")
+    data_list = get_raw_data(config.get('num_samples', 1000))
+    # Convert list of arrays to single numpy array
+    data = np.array(data_list)
+    logger.info(f"Loaded data shape: {data.shape}")
+    
+    # Run inference
+    results = manager.run_sharded_inference(
+        data,
+        process_in_chunks=config.get('process_in_chunks', True),
+        chunk_size=config.get('chunk_size', 128)
+    )
+    
+    return results
 
 def main():
-    """Main function for command-line usage."""
-    parser = argparse.ArgumentParser(description='Sharded Data Partitioning Benchmark')
-    parser.add_argument('--num-workers', type=int, default=4, help='Number of Dask workers')
-    parser.add_argument('--num-samples', type=int, default=10000, help='Number of samples to process')
-    parser.add_argument('--num-shards', type=int, default=4, help='Number of data shards')
-    parser.add_argument('--dask-scheduler-address', type=str, default=None, help='Dask scheduler address (optional)')
-    parser.add_argument('--output', type=str, default='sharded_results.json', help='Output file for results')
+    """Main function for running sharded partitioning experiments."""
+    parser = argparse.ArgumentParser(description='Sharded Data Partitioning')
+    parser.add_argument('--workers', type=int, default=2, help='Number of workers')
+    parser.add_argument('--shards', type=int, default=None, help='Number of shards')
+    parser.add_argument('--samples', type=int, default=1000, help='Number of samples')
+    parser.add_argument('--chunk-size', type=int, default=128, help='Chunk size for processing')
+    parser.add_argument('--no-chunks', action='store_true', help='Disable chunked processing')
     
     args = parser.parse_args()
     
+    # Configure logging
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
+    
+    # Run experiment
     config = {
-        'num_workers': args.num_workers,
-        'num_samples': args.num_samples,
-        'num_shards': args.num_shards,
-        'dask_scheduler_address': args.dask_scheduler_address
+        'num_workers': args.workers,
+        'num_shards': args.shards or args.workers,
+        'num_samples': args.samples,
+        'process_in_chunks': not args.no_chunks,
+        'chunk_size': args.chunk_size
     }
     
-    try:
-        results = run_sharded_partitioning(config)
-        
-        # Save results
-        from utils import save_results
-        save_results(results, args.output)
-        
-        print(f"Sharded partitioning benchmark completed. Results saved to {args.output}")
-        
-    except Exception as e:
-        logger.error(f"Benchmark failed: {str(e)}")
-        sys.exit(1)
+    print(f"🚀 Starting Sharded Partitioning Experiment")
+    print(f"   Workers: {args.workers}")
+    print(f"   Shards: {config['num_shards']}")
+    print(f"   Samples: {args.samples}")
+    print(f"   Chunk Size: {args.chunk_size}")
+    print(f"   Chunked Processing: {config['process_in_chunks']}")
+    
+    results = run_sharded_partitioning(config)
+    
+    # Print results
+    print("\n" + "="*60)
+    print("SHARDED PARTITIONING RESULTS")
+    print("="*60)
+    print(f"Total Inferences: {results['total_inferences']}")
+    print(f"Total Duration: {results['total_duration']:.2f}s")
+    print(f"Throughput: {results['throughput']:.2f} inf/s")
+    print(f"Completed Tasks: {results['completed_tasks']}")
+    print(f"Failed Tasks: {results['failed_tasks']}")
+    print(f"Distribution Efficiency: {results['shard_distribution_efficiency']:.3f}")
+    print(f"Average CPU Usage: {results['avg_cpu_percent']:.1f}%")
+    print(f"Average Memory Usage: {results['avg_memory_mb']:.1f} MB")
+    print(f"Maximum Memory Usage: {results['max_memory_mb']:.1f} MB")
+    
+    if results['worker_results']:
+        print(f"\nWorker Details:")
+        for worker_result in results['worker_results']:
+            print(f"  Worker {worker_result['worker_id']}: "
+                  f"{worker_result['total_inferences']} inferences, "
+                  f"{worker_result['throughput']:.2f} inf/s")
 
 if __name__ == "__main__":
     main()

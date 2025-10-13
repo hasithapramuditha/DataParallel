@@ -97,6 +97,49 @@ def get_dataset(batch_size: int = 128, num_workers: int = 1) -> torch.utils.data
         num_workers=num_workers
     )
 
+def get_dataset_for_distributed(batch_size: int = 128, num_workers: int = 1, 
+                               rank: int = 0, world_size: int = 1) -> torch.utils.data.DataLoader:
+    """
+    Load CIFAR-10 test dataset with proper distributed sampling for DDP.
+    
+    Args:
+        batch_size: Batch size for data loader
+        num_workers: Number of worker processes for data loading
+        rank: Rank of the current process
+        world_size: Total number of processes
+        
+    Returns:
+        DataLoader for CIFAR-10 test set with DistributedSampler
+    """
+    transform = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+    ])
+    
+    testset = torchvision.datasets.CIFAR10(
+        root='./data', 
+        train=False, 
+        download=True, 
+        transform=transform
+    )
+    
+    # Create DistributedSampler for proper data distribution
+    from torch.utils.data.distributed import DistributedSampler
+    sampler = DistributedSampler(
+        testset,
+        num_replicas=world_size,
+        rank=rank,
+        shuffle=False
+    )
+    
+    return torch.utils.data.DataLoader(
+        testset, 
+        batch_size=batch_size, 
+        sampler=sampler,
+        num_workers=num_workers,
+        pin_memory=True
+    )
+
 def get_model() -> torch.nn.Module:
     """
     Load pre-trained ResNet-18 model for inference.
@@ -311,51 +354,125 @@ def split_data_uniform(data: torch.Tensor, world_size: int) -> List[torch.Tensor
     """
     return torch.chunk(data, world_size)
 
-def split_data_dynamic(data: List[np.ndarray], num_workers: int) -> List[List[np.ndarray]]:
+def split_data_dynamic(data: List[np.ndarray], num_workers: int, chunk_size: int = 32) -> List[List[np.ndarray]]:
     """
-    Split data for dynamic partitioning (initial split, Ray will handle load balancing).
+    Split data for dynamic partitioning with configurable chunk size.
     
     Args:
         data: List of numpy arrays
         num_workers: Number of workers
+        chunk_size: Size of each chunk for dynamic load balancing
         
     Returns:
-        List of data chunks for each worker
+        List of data chunks for dynamic assignment
     """
-    chunk_size = len(data) // num_workers
+    if not data:
+        return []
+    
     chunks = []
+    for i in range(0, len(data), chunk_size):
+        chunk = data[i:i + chunk_size]
+        chunks.append(chunk)
     
-    for i in range(num_workers):
-        start_idx = i * chunk_size
-        if i == num_workers - 1:  # Last worker gets remaining data
-            end_idx = len(data)
-        else:
-            end_idx = (i + 1) * chunk_size
-        chunks.append(data[start_idx:end_idx])
-    
+    logger.info(f"Split {len(data)} samples into {len(chunks)} chunks of size {chunk_size}")
     return chunks
 
-def create_shards(data: np.ndarray, num_shards: int) -> List[np.ndarray]:
+def create_shards(data: np.ndarray, num_shards: int, min_shard_size: int = 1) -> List[np.ndarray]:
     """
-    Create data shards for sharded partitioning.
+    Create data shards for sharded partitioning with improved distribution.
+    
+    Args:
+        data: Input data array
+        num_shards: Number of shards to create
+        min_shard_size: Minimum size for each shard
+        
+    Returns:
+        List of data shards with balanced sizes
+    """
+    if len(data) == 0:
+        return []
+    
+    if num_shards <= 0:
+        raise ValueError("Number of shards must be positive")
+    
+    if num_shards > len(data):
+        logger.warning(f"Number of shards ({num_shards}) exceeds data size ({len(data)}). Using {len(data)} shards.")
+        num_shards = len(data)
+    
+    # Calculate base shard size and remainder
+    base_shard_size = len(data) // num_shards
+    remainder = len(data) % num_shards
+    
+    shards = []
+    start_idx = 0
+    
+    for i in range(num_shards):
+        # Add one extra sample to first 'remainder' shards for even distribution
+        current_shard_size = base_shard_size + (1 if i < remainder else 0)
+        
+        # Ensure minimum shard size
+        if current_shard_size < min_shard_size and i < num_shards - 1:
+            current_shard_size = min_shard_size
+        
+        end_idx = start_idx + current_shard_size
+        shard = data[start_idx:end_idx]
+        shards.append(shard)
+        start_idx = end_idx
+    
+    # Log shard distribution
+    shard_sizes = [len(shard) for shard in shards]
+    logger.info(f"Created {len(shards)} shards with sizes: {shard_sizes}")
+    logger.info(f"Shard size statistics - Min: {min(shard_sizes)}, Max: {max(shard_sizes)}, Mean: {np.mean(shard_sizes):.1f}")
+    
+    return shards
+
+def create_balanced_shards(data: np.ndarray, num_shards: int) -> List[np.ndarray]:
+    """
+    Create optimally balanced shards using a more sophisticated algorithm.
     
     Args:
         data: Input data array
         num_shards: Number of shards to create
         
     Returns:
-        List of data shards
+        List of optimally balanced data shards
     """
-    shard_size = len(data) // num_shards
-    shards = []
+    if len(data) == 0 or num_shards <= 0:
+        return []
     
-    for i in range(num_shards):
-        start_idx = i * shard_size
-        if i == num_shards - 1:  # Last shard gets remaining data
-            end_idx = len(data)
+    if num_shards >= len(data):
+        # If more shards than data points, create one shard per data point
+        return [data[i:i+1] for i in range(len(data))]
+    
+    # Use a greedy algorithm to balance shard sizes
+    shard_sizes = [0] * num_shards
+    shard_assignments = [[] for _ in range(num_shards)]
+    
+    # Sort data indices by some criteria (e.g., data size if applicable)
+    data_indices = list(range(len(data)))
+    
+    # Assign each data point to the shard with minimum current size
+    for idx in data_indices:
+        min_shard = min(range(num_shards), key=lambda i: shard_sizes[i])
+        shard_assignments[min_shard].append(idx)
+        shard_sizes[min_shard] += 1
+    
+    # Create actual shards
+    shards = []
+    for assignment in shard_assignments:
+        if assignment:
+            shard = data[assignment]
+            shards.append(shard)
         else:
-            end_idx = (i + 1) * shard_size
-        shards.append(data[start_idx:end_idx])
+            # Empty shard
+            shards.append(np.array([]))
+    
+    # Log balance statistics
+    non_empty_shards = [s for s in shards if len(s) > 0]
+    if non_empty_shards:
+        shard_sizes = [len(shard) for shard in non_empty_shards]
+        balance_ratio = min(shard_sizes) / max(shard_sizes) if max(shard_sizes) > 0 else 1.0
+        logger.info(f"Created {len(shards)} shards with balance ratio: {balance_ratio:.3f}")
     
     return shards
 

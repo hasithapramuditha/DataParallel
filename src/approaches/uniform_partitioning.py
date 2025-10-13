@@ -47,7 +47,7 @@ def cleanup_distributed():
 
 def inference_worker(rank: int, world_size: int, config: Dict[str, Any]) -> Dict[str, float]:
     """
-    Worker function for distributed inference.
+    Worker function for distributed inference using proper DDP.
     
     Args:
         rank: Rank of the current process
@@ -70,45 +70,48 @@ def inference_worker(rank: int, world_size: int, config: Dict[str, Any]) -> Dict
         if world_size > 1:
             model = torch.nn.parallel.DistributedDataParallel(model)
         
-        # Load dataset
-        dataloader = get_dataset(
-            batch_size=config['batch_size'],
-            num_workers=config['num_workers']
-        )
+        # Load dataset with proper distributed sampling
+        if world_size > 1:
+            # Use DistributedSampler for proper data distribution
+            from torch.utils.data.distributed import DistributedSampler
+            from utils import get_dataset_for_distributed
+            dataset = get_dataset_for_distributed(
+                batch_size=config['batch_size'],
+                num_workers=config['num_workers'],
+                rank=rank,
+                world_size=world_size
+            )
+        else:
+            # Single process mode
+            from utils import get_dataset
+            dataset = get_dataset(
+                batch_size=config['batch_size'],
+                num_workers=config['num_workers']
+            )
         
-        logger.info(f"Worker {rank}: Starting inference with {len(dataloader)} batches")
+        logger.info(f"Worker {rank}: Starting inference with {len(dataset)} batches")
         
         # Start timing
         metrics.start_timing()
         
         total_inferences = 0
-        for batch_idx, (data, _) in enumerate(dataloader):
+        for batch_idx, (data, _) in enumerate(dataset):
             # Record metrics periodically
             if batch_idx % 10 == 0:
                 metrics.record_cpu_usage()
                 metrics.record_memory_usage()
             
-            # For uniform partitioning, we'll use a simpler approach
-            # Each worker processes a portion of the batch based on its rank
-            batch_size = data.size(0)
-            chunk_size = batch_size // world_size
-            start_idx = rank * chunk_size
-            end_idx = start_idx + chunk_size if rank < world_size - 1 else batch_size
-            
-            # Get this worker's chunk
-            chunk = data[start_idx:end_idx]
-            
-            # Perform inference
+            # Perform inference - DDP handles data distribution automatically
             with torch.no_grad():
-                _ = model(chunk)
+                _ = model(data)
             
             # Update metrics
-            batch_inferences = len(chunk)
+            batch_inferences = data.size(0)
             metrics.add_inferences(batch_inferences)
             total_inferences += batch_inferences
             
             if rank == 0 and batch_idx % 50 == 0:
-                logger.info(f"Processed {batch_idx + 1}/{len(dataloader)} batches")
+                logger.info(f"Processed {batch_idx + 1}/{len(dataset)} batches")
         
         # Stop timing
         metrics.stop_timing()
