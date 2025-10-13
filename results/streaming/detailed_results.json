@@ -1,9 +1,9 @@
 {
   "benchmark_config": {
     "stream_rate": 1000,
-    "total_samples": 2000,
-    "num_streams": 2,
-    "iterations": 1,
+    "total_samples": 8000,
+    "num_streams": 8,
+    "iterations": 3,
     "strategies": [
       "uniform",
       "dynamic",
@@ -11,41 +11,110 @@
     ],
     "node_counts": [
       1,
-      2
+      2,
+      4,
+      8,
+      16
     ]
   },
-  "execution_time": 99.06124305725098,
+  "execution_time": 4281.359566926956,
   "detailed_results": [
     {
       "strategy": "uniform",
       "nodes": 1,
       "iteration": 0,
-      "total_duration": 7.420971870422363,
-      "avg_throughput": 377.4823911155176,
-      "avg_cpu_percent": 33.8,
-      "avg_memory_mb": 667.703125,
-      "total_inferences": 2000,
-      "successful_streams": 2,
+      "total_duration": 32.541847944259644,
+      "avg_throughput": 381.3868708586656,
+      "avg_cpu_percent": 37.35,
+      "avg_memory_mb": 549.6015625,
+      "total_inferences": 8000,
+      "successful_streams": 8,
       "failed_streams": 0,
       "stream_results": [
         {
           "stream_index": 0,
-          "duration": 2.7757468223571777,
-          "throughput": 388.3849643871986,
+          "duration": 2.9486238956451416,
+          "throughput": 375.8101531095857,
           "total_inferences": 1000,
-          "avg_cpu_percent": 30.2,
-          "avg_memory_mb": 627.171875,
+          "avg_cpu_percent": 27.9,
+          "avg_memory_mb": 535.953125,
           "strategy": "uniform",
           "nodes": 1,
           "iteration": 0
         },
         {
           "stream_index": 1,
-          "duration": 2.892012119293213,
-          "throughput": 366.5798178438366,
+          "duration": 3.0521481037139893,
+          "throughput": 345.93193651512115,
           "total_inferences": 1000,
-          "avg_cpu_percent": 37.4,
-          "avg_memory_mb": 708.234375,
+          "avg_cpu_percent": 34.9,
+          "avg_memory_mb": 646.21875,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 0
+        },
+        {
+          "stream_index": 2,
+          "duration": 3.0171711444854736,
+          "throughput": 350.9633765216829,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 43.9,
+          "avg_memory_mb": 477.625,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 0
+        },
+        {
+          "stream_index": 3,
+          "duration": 2.712603807449341,
+          "throughput": 393.7322444931938,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 43.1,
+          "avg_memory_mb": 491.34375,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 0
+        },
+        {
+          "stream_index": 4,
+          "duration": 2.6848480701446533,
+          "throughput": 396.67539371246033,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 34.5,
+          "avg_memory_mb": 555.96875,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 0
+        },
+        {
+          "stream_index": 5,
+          "duration": 2.683838129043579,
+          "throughput": 396.5929893039229,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 38.0,
+          "avg_memory_mb": 532.828125,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 0
+        },
+        {
+          "stream_index": 6,
+          "duration": 2.6802749633789062,
+          "throughput": 397.15854321366413,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 41.1,
+          "avg_memory_mb": 570.109375,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 0
+        },
+        {
+          "stream_index": 7,
+          "duration": 2.7005817890167236,
+          "throughput": 394.2303299996936,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.4,
+          "avg_memory_mb": 586.765625,
           "strategy": "uniform",
           "nodes": 1,
           "iteration": 0
@@ -54,37 +123,1429 @@
     },
     {
       "strategy": "uniform",
-      "nodes": 2,
-      "iteration": 0,
-      "total_duration": 7.6997230052948,
-      "avg_throughput": 364.7829350364286,
-      "avg_cpu_percent": 42.45,
-      "avg_memory_mb": 592.8359375,
-      "total_inferences": 2000,
-      "successful_streams": 2,
+      "nodes": 1,
+      "iteration": 1,
+      "total_duration": 31.60659909248352,
+      "avg_throughput": 393.8903146740377,
+      "avg_cpu_percent": 35.787499999999994,
+      "avg_memory_mb": 559.6328125,
+      "total_inferences": 8000,
+      "successful_streams": 8,
       "failed_streams": 0,
       "stream_results": [
         {
           "stream_index": 0,
-          "duration": 2.906769275665283,
-          "throughput": 364.68840877477226,
+          "duration": 2.689154863357544,
+          "throughput": 396.3104789122642,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.9,
+          "avg_memory_mb": 499.765625,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 1
+        },
+        {
+          "stream_index": 1,
+          "duration": 2.7064030170440674,
+          "throughput": 393.1042846760986,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.0,
+          "avg_memory_mb": 562.65625,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 1
+        },
+        {
+          "stream_index": 2,
+          "duration": 2.6792330741882324,
+          "throughput": 397.36074576382947,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.4,
+          "avg_memory_mb": 574.296875,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 1
+        },
+        {
+          "stream_index": 3,
+          "duration": 2.673245906829834,
+          "throughput": 398.28149338847464,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.3,
+          "avg_memory_mb": 590.0625,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 1
+        },
+        {
+          "stream_index": 4,
+          "duration": 2.682965040206909,
+          "throughput": 396.94670359372566,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.2,
+          "avg_memory_mb": 581.140625,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 1
+        },
+        {
+          "stream_index": 5,
+          "duration": 2.800025701522827,
+          "throughput": 379.2650892528549,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.8,
+          "avg_memory_mb": 563.515625,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 1
+        },
+        {
+          "stream_index": 6,
+          "duration": 2.689328193664551,
+          "throughput": 396.07556657175644,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 37.8,
+          "avg_memory_mb": 585.796875,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 1
+        },
+        {
+          "stream_index": 7,
+          "duration": 2.704216957092285,
+          "throughput": 393.7781552332976,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.9,
+          "avg_memory_mb": 519.828125,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 1
+        }
+      ]
+    },
+    {
+      "strategy": "uniform",
+      "nodes": 1,
+      "iteration": 2,
+      "total_duration": 31.81456708908081,
+      "avg_throughput": 392.6736853615978,
+      "avg_cpu_percent": 35.2125,
+      "avg_memory_mb": 651.625,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 2.7003021240234375,
+          "throughput": 394.85163588430987,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 36.5,
+          "avg_memory_mb": 490.4375,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 2
+        },
+        {
+          "stream_index": 1,
+          "duration": 2.7144968509674072,
+          "throughput": 392.3943140440694,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.6,
+          "avg_memory_mb": 518.609375,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 2
+        },
+        {
+          "stream_index": 2,
+          "duration": 2.7071616649627686,
+          "throughput": 393.128602597535,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 34.0,
+          "avg_memory_mb": 688.125,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 2
+        },
+        {
+          "stream_index": 3,
+          "duration": 2.6980762481689453,
+          "throughput": 394.3850559019574,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.5,
+          "avg_memory_mb": 726.78125,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 2
+        },
+        {
+          "stream_index": 4,
+          "duration": 2.719775915145874,
+          "throughput": 391.48487833580396,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.5,
+          "avg_memory_mb": 736.3125,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 2
+        },
+        {
+          "stream_index": 5,
+          "duration": 2.723797082901001,
+          "throughput": 390.7944665129069,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 34.0,
+          "avg_memory_mb": 747.5,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 2
+        },
+        {
+          "stream_index": 6,
+          "duration": 2.714493989944458,
+          "throughput": 392.38858735284975,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.6,
+          "avg_memory_mb": 673.078125,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 2
+        },
+        {
+          "stream_index": 7,
+          "duration": 2.7210488319396973,
+          "throughput": 391.9619422633498,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.0,
+          "avg_memory_mb": 632.15625,
+          "strategy": "uniform",
+          "nodes": 1,
+          "iteration": 2
+        }
+      ]
+    },
+    {
+      "strategy": "uniform",
+      "nodes": 2,
+      "iteration": 0,
+      "total_duration": 31.866331100463867,
+      "avg_throughput": 390.47358813752896,
+      "avg_cpu_percent": 38.5125,
+      "avg_memory_mb": 531.908203125,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 2.7315988540649414,
+          "throughput": 390.1660718166096,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.0,
+          "avg_memory_mb": 509.453125,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 0
+        },
+        {
+          "stream_index": 1,
+          "duration": 2.7114789485931396,
+          "throughput": 392.94555522161875,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.1,
+          "avg_memory_mb": 542.53125,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 0
+        },
+        {
+          "stream_index": 2,
+          "duration": 2.702998161315918,
+          "throughput": 393.7043779776194,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 34.9,
+          "avg_memory_mb": 553.9375,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 0
+        },
+        {
+          "stream_index": 3,
+          "duration": 2.7005908489227295,
+          "throughput": 394.11275430833433,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.2,
+          "avg_memory_mb": 581.484375,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 0
+        },
+        {
+          "stream_index": 4,
+          "duration": 2.8688619136810303,
+          "throughput": 369.61596300935827,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 37.4,
+          "avg_memory_mb": 554.453125,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 0
+        },
+        {
+          "stream_index": 5,
+          "duration": 2.7392220497131348,
+          "throughput": 389.33171052379976,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 41.6,
+          "avg_memory_mb": 495.1875,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 0
+        },
+        {
+          "stream_index": 6,
+          "duration": 2.7069969177246094,
+          "throughput": 394.9810716639985,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 52.1,
+          "avg_memory_mb": 488.4375,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 0
+        },
+        {
+          "stream_index": 7,
+          "duration": 2.67136812210083,
+          "throughput": 398.93120057889337,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 36.8,
+          "avg_memory_mb": 529.78125,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 0
+        }
+      ]
+    },
+    {
+      "strategy": "uniform",
+      "nodes": 2,
+      "iteration": 1,
+      "total_duration": 32.325231075286865,
+      "avg_throughput": 383.2003504317414,
+      "avg_cpu_percent": 37.3125,
+      "avg_memory_mb": 538.138671875,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 2.700277090072632,
+          "throughput": 394.99334662438895,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 36.2,
+          "avg_memory_mb": 507.265625,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 1
+        },
+        {
+          "stream_index": 1,
+          "duration": 2.6814770698547363,
+          "throughput": 397.2871629567275,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.4,
+          "avg_memory_mb": 539.171875,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 1
+        },
+        {
+          "stream_index": 2,
+          "duration": 2.6731741428375244,
+          "throughput": 398.25290359825897,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 36.5,
+          "avg_memory_mb": 567.0,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 1
+        },
+        {
+          "stream_index": 3,
+          "duration": 2.6736199855804443,
+          "throughput": 398.50210552338615,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 36.7,
+          "avg_memory_mb": 549.984375,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 1
+        },
+        {
+          "stream_index": 4,
+          "duration": 2.661612033843994,
+          "throughput": 400.07092779681915,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.2,
+          "avg_memory_mb": 546.625,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 1
+        },
+        {
+          "stream_index": 5,
+          "duration": 2.9697341918945312,
+          "throughput": 356.77742921109757,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 37.1,
+          "avg_memory_mb": 516.578125,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 1
+        },
+        {
+          "stream_index": 6,
+          "duration": 2.923275947570801,
+          "throughput": 362.67207516746214,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 41.5,
+          "avg_memory_mb": 542.484375,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 1
+        },
+        {
+          "stream_index": 7,
+          "duration": 2.9644339084625244,
+          "throughput": 357.0468525757906,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 39.9,
+          "avg_memory_mb": 536.0,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 1
+        }
+      ]
+    },
+    {
+      "strategy": "uniform",
+      "nodes": 2,
+      "iteration": 2,
+      "total_duration": 31.90747904777527,
+      "avg_throughput": 391.94889443531525,
+      "avg_cpu_percent": 37.199999999999996,
+      "avg_memory_mb": 604.498046875,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 2.6958110332489014,
+          "throughput": 395.58321943298944,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 40.7,
+          "avg_memory_mb": 614.03125,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 2
+        },
+        {
+          "stream_index": 1,
+          "duration": 2.710758924484253,
+          "throughput": 392.9519976563246,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.9,
+          "avg_memory_mb": 703.5,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 2
+        },
+        {
+          "stream_index": 2,
+          "duration": 2.719697952270508,
+          "throughput": 391.2444458788827,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.8,
+          "avg_memory_mb": 689.484375,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 2
+        },
+        {
+          "stream_index": 3,
+          "duration": 2.804342031478882,
+          "throughput": 379.2442735688341,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.8,
+          "avg_memory_mb": 668.65625,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 2
+        },
+        {
+          "stream_index": 4,
+          "duration": 2.6907970905303955,
+          "throughput": 395.749539080501,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 37.9,
+          "avg_memory_mb": 545.140625,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 2
+        },
+        {
+          "stream_index": 5,
+          "duration": 2.702266216278076,
+          "throughput": 394.55979668755595,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 37.9,
+          "avg_memory_mb": 515.359375,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 2
+        },
+        {
+          "stream_index": 6,
+          "duration": 2.6987247467041016,
+          "throughput": 394.3397079672002,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 37.0,
+          "avg_memory_mb": 538.109375,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 2
+        },
+        {
+          "stream_index": 7,
+          "duration": 2.7143337726593018,
+          "throughput": 391.91817521023427,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 36.6,
+          "avg_memory_mb": 561.703125,
+          "strategy": "uniform",
+          "nodes": 2,
+          "iteration": 2
+        }
+      ]
+    },
+    {
+      "strategy": "uniform",
+      "nodes": 4,
+      "iteration": 0,
+      "total_duration": 33.04993510246277,
+      "avg_throughput": 372.48363751010254,
+      "avg_cpu_percent": 39.2,
+      "avg_memory_mb": 530.466796875,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 2.708383083343506,
+          "throughput": 394.34152465038807,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 36.3,
+          "avg_memory_mb": 512.96875,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 0
+        },
+        {
+          "stream_index": 1,
+          "duration": 2.716371774673462,
+          "throughput": 391.94428776530947,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.5,
+          "avg_memory_mb": 579.578125,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 0
+        },
+        {
+          "stream_index": 2,
+          "duration": 2.7105610370635986,
+          "throughput": 392.7126650860675,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.1,
+          "avg_memory_mb": 586.1875,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 0
+        },
+        {
+          "stream_index": 3,
+          "duration": 2.9280502796173096,
+          "throughput": 361.59392221397377,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.3,
+          "avg_memory_mb": 585.9375,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 0
+        },
+        {
+          "stream_index": 4,
+          "duration": 2.9117591381073,
+          "throughput": 363.99716286772525,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 43.6,
+          "avg_memory_mb": 494.171875,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 0
+        },
+        {
+          "stream_index": 5,
+          "duration": 2.904690980911255,
+          "throughput": 365.4181290536452,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 41.4,
+          "avg_memory_mb": 510.078125,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 0
+        },
+        {
+          "stream_index": 6,
+          "duration": 3.0948567390441895,
+          "throughput": 342.13431967026975,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 43.7,
+          "avg_memory_mb": 482.125,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 0
+        },
+        {
+          "stream_index": 7,
+          "duration": 2.8862762451171875,
+          "throughput": 367.7270887734411,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 42.7,
+          "avg_memory_mb": 492.6875,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 0
+        }
+      ]
+    },
+    {
+      "strategy": "uniform",
+      "nodes": 4,
+      "iteration": 1,
+      "total_duration": 32.5263409614563,
+      "avg_throughput": 382.2390744183616,
+      "avg_cpu_percent": 38.75,
+      "avg_memory_mb": 560.849609375,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 2.853355884552002,
+          "throughput": 372.513018581759,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 42.6,
+          "avg_memory_mb": 460.375,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 1
+        },
+        {
+          "stream_index": 1,
+          "duration": 2.9960598945617676,
+          "throughput": 353.3235318571703,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 40.4,
+          "avg_memory_mb": 628.46875,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 1
+        },
+        {
+          "stream_index": 2,
+          "duration": 2.7515063285827637,
+          "throughput": 386.6463112845065,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 43.9,
+          "avg_memory_mb": 662.8125,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 1
+        },
+        {
+          "stream_index": 3,
+          "duration": 2.777207136154175,
+          "throughput": 383.191833361457,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 39.0,
+          "avg_memory_mb": 473.25,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 1
+        },
+        {
+          "stream_index": 4,
+          "duration": 2.727483034133911,
+          "throughput": 390.0858777756263,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 36.9,
+          "avg_memory_mb": 545.046875,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 1
+        },
+        {
+          "stream_index": 5,
+          "duration": 2.7224011421203613,
+          "throughput": 390.9638891693048,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 36.0,
+          "avg_memory_mb": 546.734375,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 1
+        },
+        {
+          "stream_index": 6,
+          "duration": 2.726875066757202,
+          "throughput": 390.00524525544284,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.5,
+          "avg_memory_mb": 575.84375,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 1
+        },
+        {
+          "stream_index": 7,
+          "duration": 2.720299005508423,
+          "throughput": 391.18288806162593,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.7,
+          "avg_memory_mb": 594.265625,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 1
+        }
+      ]
+    },
+    {
+      "strategy": "uniform",
+      "nodes": 4,
+      "iteration": 2,
+      "total_duration": 33.995980978012085,
+      "avg_throughput": 358.34874380023064,
+      "avg_cpu_percent": 40.6875,
+      "avg_memory_mb": 471.4296875,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 2.907942056655884,
+          "throughput": 365.4571324760148,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 38.7,
+          "avg_memory_mb": 401.34375,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 2
+        },
+        {
+          "stream_index": 1,
+          "duration": 3.0590310096740723,
+          "throughput": 345.6692203457661,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 40.3,
+          "avg_memory_mb": 377.46875,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 2
+        },
+        {
+          "stream_index": 2,
+          "duration": 2.935966968536377,
+          "throughput": 361.3208948255086,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 41.0,
+          "avg_memory_mb": 503.625,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 2
+        },
+        {
+          "stream_index": 3,
+          "duration": 3.038914918899536,
+          "throughput": 348.53285697868176,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 41.5,
+          "avg_memory_mb": 488.875,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 2
+        },
+        {
+          "stream_index": 4,
+          "duration": 2.863957166671753,
+          "throughput": 370.7570772210509,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 43.6,
+          "avg_memory_mb": 476.953125,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 2
+        },
+        {
+          "stream_index": 5,
+          "duration": 3.0327420234680176,
+          "throughput": 349.76848072218206,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 39.4,
+          "avg_memory_mb": 486.25,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 2
+        },
+        {
+          "stream_index": 6,
+          "duration": 2.8459279537200928,
+          "throughput": 372.86944647924383,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 40.2,
+          "avg_memory_mb": 547.765625,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 2
+        },
+        {
+          "stream_index": 7,
+          "duration": 3.0053200721740723,
+          "throughput": 352.41484135339675,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 40.8,
+          "avg_memory_mb": 489.15625,
+          "strategy": "uniform",
+          "nodes": 4,
+          "iteration": 2
+        }
+      ]
+    },
+    {
+      "strategy": "uniform",
+      "nodes": 8,
+      "iteration": 0,
+      "total_duration": 33.40817379951477,
+      "avg_throughput": 370.32153880055546,
+      "avg_cpu_percent": 39.0625,
+      "avg_memory_mb": 558.44140625,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 2.9367477893829346,
+          "throughput": 361.70209463283,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 43.0,
+          "avg_memory_mb": 453.203125,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 0
+        },
+        {
+          "stream_index": 1,
+          "duration": 3.25358510017395,
+          "throughput": 324.24074297542836,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 43.6,
+          "avg_memory_mb": 429.65625,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 0
+        },
+        {
+          "stream_index": 2,
+          "duration": 2.967534065246582,
+          "throughput": 357.5194381777002,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 42.8,
+          "avg_memory_mb": 514.46875,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 0
+        },
+        {
+          "stream_index": 3,
+          "duration": 2.8286778926849365,
+          "throughput": 375.20367905539257,
           "total_inferences": 1000,
           "avg_cpu_percent": 39.3,
-          "avg_memory_mb": 662.609375,
+          "avg_memory_mb": 534.65625,
           "strategy": "uniform",
-          "nodes": 2,
+          "nodes": 8,
+          "iteration": 0
+        },
+        {
+          "stream_index": 4,
+          "duration": 2.764120101928711,
+          "throughput": 384.5360950448588,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 37.1,
+          "avg_memory_mb": 563.015625,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 0
+        },
+        {
+          "stream_index": 5,
+          "duration": 2.7485246658325195,
+          "throughput": 386.92926995410323,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.7,
+          "avg_memory_mb": 577.3125,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 0
+        },
+        {
+          "stream_index": 6,
+          "duration": 2.7606899738311768,
+          "throughput": 385.93441853955665,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.6,
+          "avg_memory_mb": 699.140625,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 0
+        },
+        {
+          "stream_index": 7,
+          "duration": 2.750232696533203,
+          "throughput": 386.50657202457353,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.4,
+          "avg_memory_mb": 696.078125,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 0
+        }
+      ]
+    },
+    {
+      "strategy": "uniform",
+      "nodes": 8,
+      "iteration": 1,
+      "total_duration": 34.261536836624146,
+      "avg_throughput": 359.22715933632117,
+      "avg_cpu_percent": 40.8125,
+      "avg_memory_mb": 504.31640625,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 2.7963829040527344,
+          "throughput": 380.7538434151199,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 37.2,
+          "avg_memory_mb": 569.671875,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 1
+        },
+        {
+          "stream_index": 1,
+          "duration": 2.781589984893799,
+          "throughput": 382.04117620804703,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.9,
+          "avg_memory_mb": 679.3125,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 1
+        },
+        {
+          "stream_index": 2,
+          "duration": 2.9967880249023438,
+          "throughput": 365.3551362125366,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 44.0,
+          "avg_memory_mb": 398.265625,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 1
+        },
+        {
+          "stream_index": 3,
+          "duration": 3.2421419620513916,
+          "throughput": 325.95767022904136,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 41.3,
+          "avg_memory_mb": 473.640625,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 1
+        },
+        {
+          "stream_index": 4,
+          "duration": 2.795546054840088,
+          "throughput": 380.87392334182925,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 43.9,
+          "avg_memory_mb": 478.6875,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 1
+        },
+        {
+          "stream_index": 5,
+          "duration": 2.793668746948242,
+          "throughput": 381.1179120977176,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 36.0,
+          "avg_memory_mb": 542.21875,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 1
+        },
+        {
+          "stream_index": 6,
+          "duration": 3.5067131519317627,
+          "throughput": 303.3240942139952,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 42.4,
+          "avg_memory_mb": 388.421875,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 1
+        },
+        {
+          "stream_index": 7,
+          "duration": 2.990493059158325,
+          "throughput": 354.3935189722826,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 45.8,
+          "avg_memory_mb": 504.3125,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 1
+        }
+      ]
+    },
+    {
+      "strategy": "uniform",
+      "nodes": 8,
+      "iteration": 2,
+      "total_duration": 35.3380229473114,
+      "avg_throughput": 340.15461688033554,
+      "avg_cpu_percent": 42.137499999999996,
+      "avg_memory_mb": 519.99609375,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 2.984025716781616,
+          "throughput": 355.4558174340391,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 40.5,
+          "avg_memory_mb": 486.265625,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 2
+        },
+        {
+          "stream_index": 1,
+          "duration": 3.1454169750213623,
+          "throughput": 335.56458810112133,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 42.5,
+          "avg_memory_mb": 509.15625,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 2
+        },
+        {
+          "stream_index": 2,
+          "duration": 3.03257417678833,
+          "throughput": 349.30169292443844,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 42.9,
+          "avg_memory_mb": 526.375,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 2
+        },
+        {
+          "stream_index": 3,
+          "duration": 2.972795009613037,
+          "throughput": 356.9335486239481,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 44.3,
+          "avg_memory_mb": 542.453125,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 2
+        },
+        {
+          "stream_index": 4,
+          "duration": 3.2524800300598145,
+          "throughput": 324.3424402718433,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 40.2,
+          "avg_memory_mb": 546.4375,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 2
+        },
+        {
+          "stream_index": 5,
+          "duration": 3.142591953277588,
+          "throughput": 336.1650689697568,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 42.4,
+          "avg_memory_mb": 537.25,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 2
+        },
+        {
+          "stream_index": 6,
+          "duration": 2.9235599040985107,
+          "throughput": 362.5759212577447,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 43.9,
+          "avg_memory_mb": 489.15625,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 2
+        },
+        {
+          "stream_index": 7,
+          "duration": 3.4881629943847656,
+          "throughput": 300.89785745979265,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 40.4,
+          "avg_memory_mb": 522.875,
+          "strategy": "uniform",
+          "nodes": 8,
+          "iteration": 2
+        }
+      ]
+    },
+    {
+      "strategy": "uniform",
+      "nodes": 16,
+      "iteration": 0,
+      "total_duration": 35.67111086845398,
+      "avg_throughput": 341.5947864351432,
+      "avg_cpu_percent": 45.05,
+      "avg_memory_mb": 499.982421875,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 3.1247808933258057,
+          "throughput": 355.4800989644532,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 55.8,
+          "avg_memory_mb": 379.09375,
+          "strategy": "uniform",
+          "nodes": 16,
           "iteration": 0
         },
         {
           "stream_index": 1,
-          "duration": 2.9114129543304443,
-          "throughput": 364.87746129808494,
+          "duration": 3.153859853744507,
+          "throughput": 334.60963483045003,
           "total_inferences": 1000,
-          "avg_cpu_percent": 45.6,
-          "avg_memory_mb": 523.0625,
+          "avg_cpu_percent": 42.2,
+          "avg_memory_mb": 479.859375,
           "strategy": "uniform",
-          "nodes": 2,
+          "nodes": 16,
           "iteration": 0
+        },
+        {
+          "stream_index": 2,
+          "duration": 3.338505983352661,
+          "throughput": 319.09885831903995,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 45.5,
+          "avg_memory_mb": 463.171875,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 0
+        },
+        {
+          "stream_index": 3,
+          "duration": 3.004418134689331,
+          "throughput": 352.5168204480573,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 43.7,
+          "avg_memory_mb": 503.28125,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 0
+        },
+        {
+          "stream_index": 4,
+          "duration": 3.1501309871673584,
+          "throughput": 335.4303273575508,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 40.3,
+          "avg_memory_mb": 621.09375,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 0
+        },
+        {
+          "stream_index": 5,
+          "duration": 2.9443211555480957,
+          "throughput": 359.9156173178087,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 41.9,
+          "avg_memory_mb": 623.15625,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 0
+        },
+        {
+          "stream_index": 6,
+          "duration": 3.1957898139953613,
+          "throughput": 330.0115314698344,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 44.7,
+          "avg_memory_mb": 462.390625,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 0
+        },
+        {
+          "stream_index": 7,
+          "duration": 3.0618209838867188,
+          "throughput": 345.69540277395095,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 46.3,
+          "avg_memory_mb": 467.8125,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 0
+        }
+      ]
+    },
+    {
+      "strategy": "uniform",
+      "nodes": 16,
+      "iteration": 1,
+      "total_duration": 34.32001090049744,
+      "avg_throughput": 353.51771881363004,
+      "avg_cpu_percent": 41.7,
+      "avg_memory_mb": 505.564453125,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 2.8885960578918457,
+          "throughput": 368.0545165589274,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 42.3,
+          "avg_memory_mb": 470.953125,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 1
+        },
+        {
+          "stream_index": 1,
+          "duration": 3.071777820587158,
+          "throughput": 344.312188564328,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 41.8,
+          "avg_memory_mb": 499.453125,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 1
+        },
+        {
+          "stream_index": 2,
+          "duration": 2.8208630084991455,
+          "throughput": 376.6211877613271,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 42.4,
+          "avg_memory_mb": 497.28125,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 1
+        },
+        {
+          "stream_index": 3,
+          "duration": 3.1488637924194336,
+          "throughput": 335.2200683323035,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 37.2,
+          "avg_memory_mb": 513.5625,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 1
+        },
+        {
+          "stream_index": 4,
+          "duration": 3.0459959506988525,
+          "throughput": 347.5252387032862,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 43.9,
+          "avg_memory_mb": 485.40625,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 1
+        },
+        {
+          "stream_index": 5,
+          "duration": 3.0838851928710938,
+          "throughput": 342.8889463689924,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 42.5,
+          "avg_memory_mb": 540.9375,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 1
+        },
+        {
+          "stream_index": 6,
+          "duration": 3.017632007598877,
+          "throughput": 350.4321056092728,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 40.9,
+          "avg_memory_mb": 529.796875,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 1
+        },
+        {
+          "stream_index": 7,
+          "duration": 2.9188966751098633,
+          "throughput": 363.0874986106028,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 42.6,
+          "avg_memory_mb": 507.125,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 1
+        }
+      ]
+    },
+    {
+      "strategy": "uniform",
+      "nodes": 16,
+      "iteration": 2,
+      "total_duration": 35.23031234741211,
+      "avg_throughput": 341.487972817075,
+      "avg_cpu_percent": 42.5625,
+      "avg_memory_mb": 527.921875,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 3.003406047821045,
+          "throughput": 352.8275047549187,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 40.7,
+          "avg_memory_mb": 507.421875,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 2
+        },
+        {
+          "stream_index": 1,
+          "duration": 2.94805908203125,
+          "throughput": 359.7885721966726,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 42.5,
+          "avg_memory_mb": 476.5,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 2
+        },
+        {
+          "stream_index": 2,
+          "duration": 2.849472999572754,
+          "throughput": 373.9033320448837,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 39.0,
+          "avg_memory_mb": 481.953125,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 2
+        },
+        {
+          "stream_index": 3,
+          "duration": 3.2498369216918945,
+          "throughput": 324.32521042881285,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 38.6,
+          "avg_memory_mb": 344.875,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 2
+        },
+        {
+          "stream_index": 4,
+          "duration": 3.1233251094818115,
+          "throughput": 338.24303944423133,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 48.2,
+          "avg_memory_mb": 490.25,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 2
+        },
+        {
+          "stream_index": 5,
+          "duration": 3.176853895187378,
+          "throughput": 331.9247470187104,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 43.3,
+          "avg_memory_mb": 623.078125,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 2
+        },
+        {
+          "stream_index": 6,
+          "duration": 3.2615251541137695,
+          "throughput": 323.111506219099,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 45.3,
+          "avg_memory_mb": 637.34375,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 2
+        },
+        {
+          "stream_index": 7,
+          "duration": 3.218705892562866,
+          "throughput": 327.7798704292714,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 42.9,
+          "avg_memory_mb": 661.953125,
+          "strategy": "uniform",
+          "nodes": 16,
+          "iteration": 2
         }
       ]
     },
@@ -92,32 +1553,98 @@
       "strategy": "dynamic",
       "nodes": 1,
       "iteration": 0,
-      "total_duration": 29.98773503303528,
-      "avg_throughput": 116.54467937630852,
-      "avg_cpu_percent": 22.2421875,
-      "avg_memory_mb": 388.82275390625,
-      "total_inferences": 2000,
-      "successful_streams": 2,
+      "total_duration": 122.48152589797974,
+      "avg_throughput": 114.8986893391245,
+      "avg_cpu_percent": 28.43125,
+      "avg_memory_mb": 338.73260498046875,
+      "total_inferences": 8000,
+      "successful_streams": 8,
       "failed_streams": 0,
       "stream_results": [
         {
           "stream_index": 0,
-          "duration": 15.029711961746216,
-          "throughput": 113.92298446373148,
+          "duration": 16.094191789627075,
+          "throughput": 110.0207933146621,
           "total_inferences": 1000,
-          "avg_cpu_percent": 23.371875,
-          "avg_memory_mb": 427.44580078125,
+          "avg_cpu_percent": 30.112499999999997,
+          "avg_memory_mb": 348.9755859375,
           "strategy": "dynamic",
           "nodes": 1,
           "iteration": 0
         },
         {
           "stream_index": 1,
-          "duration": 12.985321044921875,
-          "throughput": 119.16637428888558,
+          "duration": 13.388538122177124,
+          "throughput": 117.19431767785869,
           "total_inferences": 1000,
-          "avg_cpu_percent": 21.112499999999997,
-          "avg_memory_mb": 350.19970703125,
+          "avg_cpu_percent": 29.540625,
+          "avg_memory_mb": 383.46630859375,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 0
+        },
+        {
+          "stream_index": 2,
+          "duration": 13.578849077224731,
+          "throughput": 115.27016114227143,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 30.1125,
+          "avg_memory_mb": 316.63720703125,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 0
+        },
+        {
+          "stream_index": 3,
+          "duration": 13.05574107170105,
+          "throughput": 117.45502756212623,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 27.528124999999996,
+          "avg_memory_mb": 311.421875,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 0
+        },
+        {
+          "stream_index": 4,
+          "duration": 14.252499103546143,
+          "throughput": 111.13268187735122,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 26.284375,
+          "avg_memory_mb": 327.99169921875,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 0
+        },
+        {
+          "stream_index": 5,
+          "duration": 13.283128261566162,
+          "throughput": 118.52364602836522,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 22.762500000000003,
+          "avg_memory_mb": 418.42578125,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 0
+        },
+        {
+          "stream_index": 6,
+          "duration": 13.51828908920288,
+          "throughput": 114.43686695441151,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 29.862500000000004,
+          "avg_memory_mb": 314.27099609375,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 0
+        },
+        {
+          "stream_index": 7,
+          "duration": 13.491626977920532,
+          "throughput": 115.15602015594959,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 31.246874999999996,
+          "avg_memory_mb": 288.67138671875,
           "strategy": "dynamic",
           "nodes": 1,
           "iteration": 0
@@ -126,37 +1653,1429 @@
     },
     {
       "strategy": "dynamic",
-      "nodes": 2,
-      "iteration": 0,
-      "total_duration": 21.53297209739685,
-      "avg_throughput": 205.45772905585105,
-      "avg_cpu_percent": 32.065625,
-      "avg_memory_mb": 333.5439453125,
-      "total_inferences": 2000,
-      "successful_streams": 2,
+      "nodes": 1,
+      "iteration": 1,
+      "total_duration": 117.14180183410645,
+      "avg_throughput": 118.40548185436889,
+      "avg_cpu_percent": 27.805859375,
+      "avg_memory_mb": 334.28289794921875,
+      "total_inferences": 8000,
+      "successful_streams": 8,
       "failed_streams": 0,
       "stream_results": [
         {
           "stream_index": 0,
-          "duration": 9.630734920501709,
-          "throughput": 201.5257962190466,
+          "duration": 13.175259828567505,
+          "throughput": 117.41246826677941,
           "total_inferences": 1000,
-          "avg_cpu_percent": 31.559375000000003,
-          "avg_memory_mb": 327.8154296875,
+          "avg_cpu_percent": 30.006249999999998,
+          "avg_memory_mb": 309.61279296875,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 1
+        },
+        {
+          "stream_index": 1,
+          "duration": 13.105735301971436,
+          "throughput": 119.12757672819176,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 27.61875,
+          "avg_memory_mb": 334.6044921875,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 1
+        },
+        {
+          "stream_index": 2,
+          "duration": 13.090667009353638,
+          "throughput": 119.9284507367974,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 25.384375,
+          "avg_memory_mb": 356.69873046875,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 1
+        },
+        {
+          "stream_index": 3,
+          "duration": 13.573609113693237,
+          "throughput": 116.53455465882995,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 29.3875,
+          "avg_memory_mb": 332.06787109375,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 1
+        },
+        {
+          "stream_index": 4,
+          "duration": 13.499920845031738,
+          "throughput": 117.46483661836693,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 29.48125,
+          "avg_memory_mb": 316.0234375,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 1
+        },
+        {
+          "stream_index": 5,
+          "duration": 13.238075256347656,
+          "throughput": 118.52534748172097,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 27.921875,
+          "avg_memory_mb": 319.34033203125,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 1
+        },
+        {
+          "stream_index": 6,
+          "duration": 12.93279218673706,
+          "throughput": 120.37650605737801,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 27.5625,
+          "avg_memory_mb": 322.81591796875,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 1
+        },
+        {
+          "stream_index": 7,
+          "duration": 13.18757700920105,
+          "throughput": 117.8741142868866,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 25.084375,
+          "avg_memory_mb": 383.099609375,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 1
+        }
+      ]
+    },
+    {
+      "strategy": "dynamic",
+      "nodes": 1,
+      "iteration": 2,
+      "total_duration": 116.11704611778259,
+      "avg_throughput": 118.52822867001578,
+      "avg_cpu_percent": 26.6546875,
+      "avg_memory_mb": 373.6771240234375,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 13.380630731582642,
+          "throughput": 118.37583641679002,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 23.328125,
+          "avg_memory_mb": 395.625,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 2
+        },
+        {
+          "stream_index": 1,
+          "duration": 13.025043964385986,
+          "throughput": 118.99762688720203,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 27.709375,
+          "avg_memory_mb": 289.7314453125,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 2
+        },
+        {
+          "stream_index": 2,
+          "duration": 13.133683919906616,
+          "throughput": 117.44836412783214,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 31.890625,
+          "avg_memory_mb": 315.384765625,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 2
+        },
+        {
+          "stream_index": 3,
+          "duration": 13.295799016952515,
+          "throughput": 120.04810620665262,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 21.696875,
+          "avg_memory_mb": 410.04541015625,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 2
+        },
+        {
+          "stream_index": 4,
+          "duration": 12.897922039031982,
+          "throughput": 120.4941776285247,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 16.69375,
+          "avg_memory_mb": 438.611328125,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 2
+        },
+        {
+          "stream_index": 5,
+          "duration": 12.767760992050171,
+          "throughput": 120.84691586103094,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 23.58125,
+          "avg_memory_mb": 426.20654296875,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 2
+        },
+        {
+          "stream_index": 6,
+          "duration": 12.876020908355713,
+          "throughput": 120.88497063722629,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 23.278125,
+          "avg_memory_mb": 399.78955078125,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 2
+        },
+        {
+          "stream_index": 7,
+          "duration": 13.513392925262451,
+          "throughput": 111.12983159486748,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 45.059375,
+          "avg_memory_mb": 314.02294921875,
+          "strategy": "dynamic",
+          "nodes": 1,
+          "iteration": 2
+        }
+      ]
+    },
+    {
+      "strategy": "dynamic",
+      "nodes": 2,
+      "iteration": 0,
+      "total_duration": 92.03604388237,
+      "avg_throughput": 184.44263725957336,
+      "avg_cpu_percent": 32.528515625,
+      "avg_memory_mb": 369.4139404296875,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 10.744204044342041,
+          "throughput": 172.41329132026536,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 36.040625,
+          "avg_memory_mb": 358.2841796875,
           "strategy": "dynamic",
           "nodes": 2,
           "iteration": 0
         },
         {
           "stream_index": 1,
-          "duration": 9.619510650634766,
-          "throughput": 209.38966189265548,
+          "duration": 10.117830276489258,
+          "throughput": 187.96195000915094,
           "total_inferences": 1000,
-          "avg_cpu_percent": 32.571875,
-          "avg_memory_mb": 339.2724609375,
+          "avg_cpu_percent": 33.259375,
+          "avg_memory_mb": 364.2705078125,
           "strategy": "dynamic",
           "nodes": 2,
           "iteration": 0
+        },
+        {
+          "stream_index": 2,
+          "duration": 10.176130056381226,
+          "throughput": 185.23107823259787,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 26.793750000000003,
+          "avg_memory_mb": 381.70263671875,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 0
+        },
+        {
+          "stream_index": 3,
+          "duration": 9.866473913192749,
+          "throughput": 185.91262943627567,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 33.125,
+          "avg_memory_mb": 371.5458984375,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 0
+        },
+        {
+          "stream_index": 4,
+          "duration": 9.862298965454102,
+          "throughput": 188.19927126303563,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 28.475,
+          "avg_memory_mb": 363.65234375,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 0
+        },
+        {
+          "stream_index": 5,
+          "duration": 9.885418891906738,
+          "throughput": 188.3242996754313,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 34.396875,
+          "avg_memory_mb": 379.12890625,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 0
+        },
+        {
+          "stream_index": 6,
+          "duration": 9.910232067108154,
+          "throughput": 187.3033016892292,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.246875,
+          "avg_memory_mb": 385.126953125,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 0
+        },
+        {
+          "stream_index": 7,
+          "duration": 10.477640867233276,
+          "throughput": 180.19527645060109,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 32.890625,
+          "avg_memory_mb": 351.60009765625,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 0
+        }
+      ]
+    },
+    {
+      "strategy": "dynamic",
+      "nodes": 2,
+      "iteration": 1,
+      "total_duration": 91.11055994033813,
+      "avg_throughput": 184.30598027601513,
+      "avg_cpu_percent": 35.323828125,
+      "avg_memory_mb": 386.5888671875,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 9.948603868484497,
+          "throughput": 182.60674482313223,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 36.684375,
+          "avg_memory_mb": 375.46337890625,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 1
+        },
+        {
+          "stream_index": 1,
+          "duration": 9.895847797393799,
+          "throughput": 185.87329722110312,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 31.696875000000002,
+          "avg_memory_mb": 406.77392578125,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 1
+        },
+        {
+          "stream_index": 2,
+          "duration": 9.939974784851074,
+          "throughput": 186.06839145863364,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 40.71875,
+          "avg_memory_mb": 421.47607421875,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 1
+        },
+        {
+          "stream_index": 3,
+          "duration": 10.054765939712524,
+          "throughput": 185.52948373549853,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 33.70625,
+          "avg_memory_mb": 420.92333984375,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 1
+        },
+        {
+          "stream_index": 4,
+          "duration": 10.164122819900513,
+          "throughput": 184.10899832255237,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 31.165625,
+          "avg_memory_mb": 382.00244140625,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 1
+        },
+        {
+          "stream_index": 5,
+          "duration": 9.965428829193115,
+          "throughput": 183.7030340776402,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 40.659375,
+          "avg_memory_mb": 370.595703125,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 1
+        },
+        {
+          "stream_index": 6,
+          "duration": 10.082961082458496,
+          "throughput": 183.54645029651937,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.671875,
+          "avg_memory_mb": 346.90185546875,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 1
+        },
+        {
+          "stream_index": 7,
+          "duration": 10.042380094528198,
+          "throughput": 183.01144227304158,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 32.2875,
+          "avg_memory_mb": 368.57421875,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 1
+        }
+      ]
+    },
+    {
+      "strategy": "dynamic",
+      "nodes": 2,
+      "iteration": 2,
+      "total_duration": 91.86808586120605,
+      "avg_throughput": 181.48400048944052,
+      "avg_cpu_percent": 35.596484375,
+      "avg_memory_mb": 373.5167236328125,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 10.03716516494751,
+          "throughput": 185.3998026700499,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 33.79375,
+          "avg_memory_mb": 410.4931640625,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 2
+        },
+        {
+          "stream_index": 1,
+          "duration": 10.163970947265625,
+          "throughput": 183.29980946767108,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 26.028125000000003,
+          "avg_memory_mb": 415.3701171875,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 2
+        },
+        {
+          "stream_index": 2,
+          "duration": 10.074394941329956,
+          "throughput": 183.01195333995952,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 18.190625,
+          "avg_memory_mb": 375.630859375,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 2
+        },
+        {
+          "stream_index": 3,
+          "duration": 9.991526126861572,
+          "throughput": 181.84010320693878,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 39.934375,
+          "avg_memory_mb": 354.40869140625,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 2
+        },
+        {
+          "stream_index": 4,
+          "duration": 10.059174060821533,
+          "throughput": 182.4263203746384,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 34.496875,
+          "avg_memory_mb": 414.57177734375,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 2
+        },
+        {
+          "stream_index": 5,
+          "duration": 10.04823923110962,
+          "throughput": 185.70177809626085,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 37.159375,
+          "avg_memory_mb": 358.31591796875,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 2
+        },
+        {
+          "stream_index": 6,
+          "duration": 9.813435077667236,
+          "throughput": 184.4205235932117,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 36.756249999999994,
+          "avg_memory_mb": 353.287109375,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 2
+        },
+        {
+          "stream_index": 7,
+          "duration": 10.602933883666992,
+          "throughput": 165.77171316679397,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 58.41250000000001,
+          "avg_memory_mb": 306.05615234375,
+          "strategy": "dynamic",
+          "nodes": 2,
+          "iteration": 2
+        }
+      ]
+    },
+    {
+      "strategy": "dynamic",
+      "nodes": 4,
+      "iteration": 0,
+      "total_duration": 84.75211215019226,
+      "avg_throughput": 260.90807269297136,
+      "avg_cpu_percent": 55.160937499999996,
+      "avg_memory_mb": 262.83270263671875,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 9.75928807258606,
+          "throughput": 243.7180473730534,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 57.08125,
+          "avg_memory_mb": 245.60107421875,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 0
+        },
+        {
+          "stream_index": 1,
+          "duration": 9.208210229873657,
+          "throughput": 263.8817603475487,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 71.06875,
+          "avg_memory_mb": 273.93310546875,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 0
+        },
+        {
+          "stream_index": 2,
+          "duration": 9.060536861419678,
+          "throughput": 268.98611576864585,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 61.16875,
+          "avg_memory_mb": 266.2119140625,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 0
+        },
+        {
+          "stream_index": 3,
+          "duration": 9.155065059661865,
+          "throughput": 266.7057857670952,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 54.209374999999994,
+          "avg_memory_mb": 264.3798828125,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 0
+        },
+        {
+          "stream_index": 4,
+          "duration": 9.105774164199829,
+          "throughput": 262.40801526435786,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 61.671875,
+          "avg_memory_mb": 264.71923828125,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 0
+        },
+        {
+          "stream_index": 5,
+          "duration": 9.340119123458862,
+          "throughput": 259.58274571974806,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 50.834374999999994,
+          "avg_memory_mb": 249.58447265625,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 0
+        },
+        {
+          "stream_index": 6,
+          "duration": 9.237918138504028,
+          "throughput": 259.1171713473753,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 38.71875,
+          "avg_memory_mb": 263.42333984375,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 0
+        },
+        {
+          "stream_index": 7,
+          "duration": 8.971516847610474,
+          "throughput": 262.8649399559467,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 46.534375,
+          "avg_memory_mb": 274.80859375,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 0
+        }
+      ]
+    },
+    {
+      "strategy": "dynamic",
+      "nodes": 4,
+      "iteration": 1,
+      "total_duration": 85.06902384757996,
+      "avg_throughput": 258.1409529669382,
+      "avg_cpu_percent": 56.759375000000006,
+      "avg_memory_mb": 272.13079833984375,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 9.22566294670105,
+          "throughput": 257.1204450252087,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 55.059375,
+          "avg_memory_mb": 271.7216796875,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 1
+        },
+        {
+          "stream_index": 1,
+          "duration": 9.043649911880493,
+          "throughput": 264.4183448144821,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 61.559374999999996,
+          "avg_memory_mb": 272.27783203125,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 1
+        },
+        {
+          "stream_index": 2,
+          "duration": 9.183651208877563,
+          "throughput": 261.15081082259036,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 37.290625,
+          "avg_memory_mb": 270.8310546875,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 1
+        },
+        {
+          "stream_index": 3,
+          "duration": 9.341964960098267,
+          "throughput": 258.70677330238453,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 60.21874999999999,
+          "avg_memory_mb": 268.4365234375,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 1
+        },
+        {
+          "stream_index": 4,
+          "duration": 9.439793109893799,
+          "throughput": 250.69542916257538,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 54.6625,
+          "avg_memory_mb": 268.9990234375,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 1
+        },
+        {
+          "stream_index": 5,
+          "duration": 9.361052751541138,
+          "throughput": 256.3541141547577,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 68.609375,
+          "avg_memory_mb": 279.0205078125,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 1
+        },
+        {
+          "stream_index": 6,
+          "duration": 9.052587985992432,
+          "throughput": 262.94151805811515,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 59.809375,
+          "avg_memory_mb": 269.54736328125,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 1
+        },
+        {
+          "stream_index": 7,
+          "duration": 9.49059510231018,
+          "throughput": 253.74018839539173,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 56.865625,
+          "avg_memory_mb": 276.21240234375,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 1
+        }
+      ]
+    },
+    {
+      "strategy": "dynamic",
+      "nodes": 4,
+      "iteration": 2,
+      "total_duration": 85.58486080169678,
+      "avg_throughput": 254.6317318273509,
+      "avg_cpu_percent": 56.240624999999994,
+      "avg_memory_mb": 268.06573486328125,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 9.283224105834961,
+          "throughput": 259.19473649116424,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 51.0125,
+          "avg_memory_mb": 270.74267578125,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 2
+        },
+        {
+          "stream_index": 1,
+          "duration": 9.497596979141235,
+          "throughput": 246.5943606887233,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 64.18437499999999,
+          "avg_memory_mb": 257.38134765625,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 2
+        },
+        {
+          "stream_index": 2,
+          "duration": 9.349427938461304,
+          "throughput": 254.28811823334343,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 57.33125,
+          "avg_memory_mb": 279.1025390625,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 2
+        },
+        {
+          "stream_index": 3,
+          "duration": 9.46485710144043,
+          "throughput": 254.91885094022928,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 39.29375,
+          "avg_memory_mb": 258.6630859375,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 2
+        },
+        {
+          "stream_index": 4,
+          "duration": 9.270106792449951,
+          "throughput": 251.87343562593009,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 54.403125,
+          "avg_memory_mb": 278.99169921875,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 2
+        },
+        {
+          "stream_index": 5,
+          "duration": 8.958016872406006,
+          "throughput": 267.0523555315816,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 59.59375,
+          "avg_memory_mb": 270.4873046875,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 2
+        },
+        {
+          "stream_index": 6,
+          "duration": 9.367163896560669,
+          "throughput": 254.71127041793426,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 64.246875,
+          "avg_memory_mb": 269.97216796875,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 2
+        },
+        {
+          "stream_index": 7,
+          "duration": 9.469569683074951,
+          "throughput": 248.42072668990107,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 59.859375,
+          "avg_memory_mb": 259.18505859375,
+          "strategy": "dynamic",
+          "nodes": 4,
+          "iteration": 2
+        }
+      ]
+    },
+    {
+      "strategy": "dynamic",
+      "nodes": 8,
+      "iteration": 0,
+      "total_duration": 103.55510187149048,
+      "avg_throughput": 322.51961316027456,
+      "avg_cpu_percent": 85.40078125,
+      "avg_memory_mb": 236.29791259765625,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 11.548827171325684,
+          "throughput": 320.8686602432305,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 72.190625,
+          "avg_memory_mb": 234.939453125,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 0
+        },
+        {
+          "stream_index": 1,
+          "duration": 11.636471033096313,
+          "throughput": 315.2019667658121,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 76.109375,
+          "avg_memory_mb": 238.44970703125,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 0
+        },
+        {
+          "stream_index": 2,
+          "duration": 12.102836847305298,
+          "throughput": 318.2411900659798,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 94.959375,
+          "avg_memory_mb": 241.47509765625,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 0
+        },
+        {
+          "stream_index": 3,
+          "duration": 11.597902059555054,
+          "throughput": 321.1851347241056,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 94.56875,
+          "avg_memory_mb": 232.94580078125,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 0
+        },
+        {
+          "stream_index": 4,
+          "duration": 11.092124938964844,
+          "throughput": 341.09968781963073,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 79.103125,
+          "avg_memory_mb": 231.61279296875,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 0
+        },
+        {
+          "stream_index": 5,
+          "duration": 11.001178741455078,
+          "throughput": 357.13568648313856,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 88.15,
+          "avg_memory_mb": 236.02294921875,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 0
+        },
+        {
+          "stream_index": 6,
+          "duration": 11.384453058242798,
+          "throughput": 316.4876611204602,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 81.68125,
+          "avg_memory_mb": 232.798828125,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 0
+        },
+        {
+          "stream_index": 7,
+          "duration": 11.734944105148315,
+          "throughput": 289.93691805983906,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 96.44375,
+          "avg_memory_mb": 242.138671875,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 0
+        }
+      ]
+    },
+    {
+      "strategy": "dynamic",
+      "nodes": 8,
+      "iteration": 1,
+      "total_duration": 101.40210509300232,
+      "avg_throughput": 331.46576928343364,
+      "avg_cpu_percent": 80.070703125,
+      "avg_memory_mb": 232.4683837890625,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 11.140918970108032,
+          "throughput": 339.167113169291,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 78.65,
+          "avg_memory_mb": 242.845703125,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 1
+        },
+        {
+          "stream_index": 1,
+          "duration": 11.131777048110962,
+          "throughput": 337.53496621676,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 83.79375,
+          "avg_memory_mb": 231.7841796875,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 1
+        },
+        {
+          "stream_index": 2,
+          "duration": 11.148989915847778,
+          "throughput": 310.8212036134459,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 84.734375,
+          "avg_memory_mb": 228.7744140625,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 1
+        },
+        {
+          "stream_index": 3,
+          "duration": 11.751297950744629,
+          "throughput": 328.8580053439865,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 76.3875,
+          "avg_memory_mb": 229.56689453125,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 1
+        },
+        {
+          "stream_index": 4,
+          "duration": 11.491672992706299,
+          "throughput": 334.75723878018005,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 78.828125,
+          "avg_memory_mb": 225.447265625,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 1
+        },
+        {
+          "stream_index": 5,
+          "duration": 11.236999750137329,
+          "throughput": 322.6293385270277,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 82.1625,
+          "avg_memory_mb": 235.26611328125,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 1
+        },
+        {
+          "stream_index": 6,
+          "duration": 11.002329111099243,
+          "throughput": 340.0308502530468,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 74.83125,
+          "avg_memory_mb": 234.7109375,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 1
+        },
+        {
+          "stream_index": 7,
+          "duration": 10.99351716041565,
+          "throughput": 337.9274383637312,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 81.17812500000001,
+          "avg_memory_mb": 231.3515625,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 1
+        }
+      ]
+    },
+    {
+      "strategy": "dynamic",
+      "nodes": 8,
+      "iteration": 2,
+      "total_duration": 100.81187796592712,
+      "avg_throughput": 338.5742296710837,
+      "avg_cpu_percent": 76.620703125,
+      "avg_memory_mb": 238.0166015625,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 11.439029932022095,
+          "throughput": 323.9951875447788,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 73.1625,
+          "avg_memory_mb": 231.26904296875,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 2
+        },
+        {
+          "stream_index": 1,
+          "duration": 11.59793734550476,
+          "throughput": 324.9127838181302,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 91.546875,
+          "avg_memory_mb": 238.79296875,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 2
+        },
+        {
+          "stream_index": 2,
+          "duration": 11.228684186935425,
+          "throughput": 342.4984915725266,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 97.221875,
+          "avg_memory_mb": 243.17041015625,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 2
+        },
+        {
+          "stream_index": 3,
+          "duration": 11.273324012756348,
+          "throughput": 324.48408526334765,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 59.790625,
+          "avg_memory_mb": 236.48193359375,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 2
+        },
+        {
+          "stream_index": 4,
+          "duration": 11.01001501083374,
+          "throughput": 339.8997408958813,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 74.990625,
+          "avg_memory_mb": 235.90380859375,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 2
+        },
+        {
+          "stream_index": 5,
+          "duration": 11.067868947982788,
+          "throughput": 341.72881880959403,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 68.903125,
+          "avg_memory_mb": 240.5087890625,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 2
+        },
+        {
+          "stream_index": 6,
+          "duration": 11.130860090255737,
+          "throughput": 339.6302072452432,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 81.478125,
+          "avg_memory_mb": 235.94287109375,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 2
+        },
+        {
+          "stream_index": 7,
+          "duration": 10.898191213607788,
+          "throughput": 371.44452221916794,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 65.871875,
+          "avg_memory_mb": 242.06298828125,
+          "strategy": "dynamic",
+          "nodes": 8,
+          "iteration": 2
+        }
+      ]
+    },
+    {
+      "strategy": "dynamic",
+      "nodes": 16,
+      "iteration": 0,
+      "total_duration": 144.16426277160645,
+      "avg_throughput": 253.2563860521234,
+      "avg_cpu_percent": 98.656640625,
+      "avg_memory_mb": 231.62725830078125,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 17.039299249649048,
+          "throughput": 233.18393927205074,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 98.93124999999999,
+          "avg_memory_mb": 218.74365234375,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 0
+        },
+        {
+          "stream_index": 1,
+          "duration": 16.3991060256958,
+          "throughput": 261.4819277589144,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 98.684375,
+          "avg_memory_mb": 237.7041015625,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 0
+        },
+        {
+          "stream_index": 2,
+          "duration": 16.221673011779785,
+          "throughput": 250.5751938740299,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 98.64687500000001,
+          "avg_memory_mb": 241.9716796875,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 0
+        },
+        {
+          "stream_index": 3,
+          "duration": 16.34361219406128,
+          "throughput": 262.0140574034065,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 98.803125,
+          "avg_memory_mb": 237.7958984375,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 0
+        },
+        {
+          "stream_index": 4,
+          "duration": 16.7827250957489,
+          "throughput": 253.2795176516205,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 98.61875,
+          "avg_memory_mb": 225.56640625,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 0
+        },
+        {
+          "stream_index": 5,
+          "duration": 16.888960123062134,
+          "throughput": 260.83595658447075,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 98.359375,
+          "avg_memory_mb": 239.45166015625,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 0
+        },
+        {
+          "stream_index": 6,
+          "duration": 15.984431028366089,
+          "throughput": 255.83260952306597,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 98.134375,
+          "avg_memory_mb": 221.1298828125,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 0
+        },
+        {
+          "stream_index": 7,
+          "duration": 16.368072748184204,
+          "throughput": 248.8478863494282,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 99.07499999999999,
+          "avg_memory_mb": 230.65478515625,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 0
+        }
+      ]
+    },
+    {
+      "strategy": "dynamic",
+      "nodes": 16,
+      "iteration": 1,
+      "total_duration": 184.7262852191925,
+      "avg_throughput": 179.00159760352972,
+      "avg_cpu_percent": 97.928125,
+      "avg_memory_mb": 198.40325927734375,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 18.48403310775757,
+          "throughput": 208.74982599220775,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 98.84375,
+          "avg_memory_mb": 226.81298828125,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 1
+        },
+        {
+          "stream_index": 1,
+          "duration": 21.882733821868896,
+          "throughput": 196.33717740591572,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 98.6875,
+          "avg_memory_mb": 200.91162109375,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 1
+        },
+        {
+          "stream_index": 2,
+          "duration": 22.310405731201172,
+          "throughput": 157.56532410629953,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 97.975,
+          "avg_memory_mb": 186.517578125,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 1
+        },
+        {
+          "stream_index": 3,
+          "duration": 22.1649169921875,
+          "throughput": 191.38162499056622,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 98.51249999999999,
+          "avg_memory_mb": 171.1259765625,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 1
+        },
+        {
+          "stream_index": 4,
+          "duration": 19.908648014068604,
+          "throughput": 185.98682427190704,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 97.65312499999999,
+          "avg_memory_mb": 199.4970703125,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 1
+        },
+        {
+          "stream_index": 5,
+          "duration": 28.374258995056152,
+          "throughput": 93.57052448523433,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 93.74687499999999,
+          "avg_memory_mb": 198.78076171875,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 1
+        },
+        {
+          "stream_index": 6,
+          "duration": 18.4157612323761,
+          "throughput": 232.55819369163146,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 99.5,
+          "avg_memory_mb": 212.33984375,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 1
+        },
+        {
+          "stream_index": 7,
+          "duration": 19.577758073806763,
+          "throughput": 165.86328588447563,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 98.50625000000001,
+          "avg_memory_mb": 191.240234375,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 1
+        }
+      ]
+    },
+    {
+      "strategy": "dynamic",
+      "nodes": 16,
+      "iteration": 2,
+      "total_duration": 169.56455397605896,
+      "avg_throughput": 201.31944492296782,
+      "avg_cpu_percent": 97.121484375,
+      "avg_memory_mb": 211.53271484375,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 25.476744890213013,
+          "throughput": 130.70673594182506,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 99.0,
+          "avg_memory_mb": 173.8828125,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 2
+        },
+        {
+          "stream_index": 1,
+          "duration": 20.464327096939087,
+          "throughput": 190.06832220761996,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 95.4375,
+          "avg_memory_mb": 206.6201171875,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 2
+        },
+        {
+          "stream_index": 2,
+          "duration": 20.922464847564697,
+          "throughput": 206.82407859376525,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 97.9,
+          "avg_memory_mb": 209.45068359375,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 2
+        },
+        {
+          "stream_index": 3,
+          "duration": 19.797976970672607,
+          "throughput": 127.71936662606578,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 89.703125,
+          "avg_memory_mb": 185.61669921875,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 2
+        },
+        {
+          "stream_index": 4,
+          "duration": 18.18541383743286,
+          "throughput": 247.18144295764574,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 99.24062500000001,
+          "avg_memory_mb": 222.53271484375,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 2
+        },
+        {
+          "stream_index": 5,
+          "duration": 16.756549835205078,
+          "throughput": 249.10470750016896,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 97.91875,
+          "avg_memory_mb": 236.318359375,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 2
+        },
+        {
+          "stream_index": 6,
+          "duration": 17.894081115722656,
+          "throughput": 229.49180550945047,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 98.853125,
+          "avg_memory_mb": 231.08056640625,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 2
+        },
+        {
+          "stream_index": 7,
+          "duration": 17.274211883544922,
+          "throughput": 229.45910004720147,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 98.91874999999999,
+          "avg_memory_mb": 226.759765625,
+          "strategy": "dynamic",
+          "nodes": 16,
+          "iteration": 2
         }
       ]
     },
@@ -164,32 +3083,98 @@
       "strategy": "sharded",
       "nodes": 1,
       "iteration": 0,
-      "total_duration": 16.939395904541016,
-      "avg_throughput": 151.00043135992993,
-      "avg_cpu_percent": 4.2046874999999995,
-      "avg_memory_mb": 533.57421875,
-      "total_inferences": 2000,
-      "successful_streams": 2,
+      "total_duration": 67.16375994682312,
+      "avg_throughput": 160.55529589632005,
+      "avg_cpu_percent": 3.712109375,
+      "avg_memory_mb": 560.8190307617188,
+      "total_inferences": 8000,
+      "successful_streams": 8,
       "failed_streams": 0,
       "stream_results": [
         {
           "stream_index": 0,
-          "duration": 7.649930953979492,
-          "throughput": 146.35314331135405,
+          "duration": 7.539332151412964,
+          "throughput": 148.38380393191412,
           "total_inferences": 1000,
-          "avg_cpu_percent": 4.512499999999999,
-          "avg_memory_mb": 560.10107421875,
+          "avg_cpu_percent": 7.934375,
+          "avg_memory_mb": 557.22998046875,
           "strategy": "sharded",
           "nodes": 1,
           "iteration": 0
         },
         {
           "stream_index": 1,
-          "duration": 7.245795965194702,
-          "throughput": 155.64771940850582,
+          "duration": 7.16700005531311,
+          "throughput": 158.00007051852512,
           "total_inferences": 1000,
-          "avg_cpu_percent": 3.896875,
-          "avg_memory_mb": 507.04736328125,
+          "avg_cpu_percent": 1.6906249999999998,
+          "avg_memory_mb": 568.9619140625,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 0
+        },
+        {
+          "stream_index": 2,
+          "duration": 7.153043985366821,
+          "throughput": 157.42768150492057,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 5.978125,
+          "avg_memory_mb": 560.23583984375,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 0
+        },
+        {
+          "stream_index": 3,
+          "duration": 6.997650861740112,
+          "throughput": 161.29862672288405,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 1.228125,
+          "avg_memory_mb": 562.2412109375,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 0
+        },
+        {
+          "stream_index": 4,
+          "duration": 6.937621116638184,
+          "throughput": 162.91206307075294,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 4.0562499999999995,
+          "avg_memory_mb": 560.93359375,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 0
+        },
+        {
+          "stream_index": 5,
+          "duration": 6.812628984451294,
+          "throughput": 166.31287099723667,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 1.675,
+          "avg_memory_mb": 557.42724609375,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 0
+        },
+        {
+          "stream_index": 6,
+          "duration": 6.893405914306641,
+          "throughput": 164.0707693825452,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 3.578125,
+          "avg_memory_mb": 560.94140625,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 0
+        },
+        {
+          "stream_index": 7,
+          "duration": 6.8195641040802,
+          "throughput": 166.03648104178163,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 3.55625,
+          "avg_memory_mb": 558.5810546875,
           "strategy": "sharded",
           "nodes": 1,
           "iteration": 0
@@ -198,37 +3183,1429 @@
     },
     {
       "strategy": "sharded",
-      "nodes": 2,
-      "iteration": 0,
-      "total_duration": 15.47360610961914,
-      "avg_throughput": 165.5017932527296,
-      "avg_cpu_percent": 15.4390625,
-      "avg_memory_mb": 466.93701171875,
-      "total_inferences": 2000,
-      "successful_streams": 2,
+      "nodes": 1,
+      "iteration": 1,
+      "total_duration": 64.71008205413818,
+      "avg_throughput": 165.30162990095175,
+      "avg_cpu_percent": 2.38359375,
+      "avg_memory_mb": 560.839599609375,
+      "total_inferences": 8000,
+      "successful_streams": 8,
       "failed_streams": 0,
       "stream_results": [
         {
           "stream_index": 0,
-          "duration": 6.804450988769531,
-          "throughput": 167.0032569645444,
+          "duration": 6.833111047744751,
+          "throughput": 165.5696596680857,
           "total_inferences": 1000,
-          "avg_cpu_percent": 16.71875,
-          "avg_memory_mb": 496.16943359375,
+          "avg_cpu_percent": 5.659375000000001,
+          "avg_memory_mb": 562.23193359375,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 1
+        },
+        {
+          "stream_index": 1,
+          "duration": 7.049865007400513,
+          "throughput": 159.92249239860823,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 1.19375,
+          "avg_memory_mb": 555.861328125,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 1
+        },
+        {
+          "stream_index": 2,
+          "duration": 6.8441338539123535,
+          "throughput": 165.36677458491374,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 1.334375,
+          "avg_memory_mb": 565.0205078125,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 1
+        },
+        {
+          "stream_index": 3,
+          "duration": 6.7929768562316895,
+          "throughput": 166.69051193566992,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 1.5750000000000002,
+          "avg_memory_mb": 563.6962890625,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 1
+        },
+        {
+          "stream_index": 4,
+          "duration": 6.845898151397705,
+          "throughput": 165.3751138744356,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 1.83125,
+          "avg_memory_mb": 559.177734375,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 1
+        },
+        {
+          "stream_index": 5,
+          "duration": 6.761821985244751,
+          "throughput": 167.63745994818242,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 0.596875,
+          "avg_memory_mb": 560.13623046875,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 1
+        },
+        {
+          "stream_index": 6,
+          "duration": 6.831769943237305,
+          "throughput": 165.61378182696194,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 2.49375,
+          "avg_memory_mb": 557.6298828125,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 1
+        },
+        {
+          "stream_index": 7,
+          "duration": 6.810932874679565,
+          "throughput": 166.23724497075642,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 4.384375,
+          "avg_memory_mb": 562.962890625,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 1
+        }
+      ]
+    },
+    {
+      "strategy": "sharded",
+      "nodes": 1,
+      "iteration": 2,
+      "total_duration": 64.59109711647034,
+      "avg_throughput": 165.67739647292595,
+      "avg_cpu_percent": 2.8343749999999996,
+      "avg_memory_mb": 561.7589721679688,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 6.853906154632568,
+          "throughput": 165.09915839777565,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 2.434375,
+          "avg_memory_mb": 560.66650390625,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 2
+        },
+        {
+          "stream_index": 1,
+          "duration": 6.7938292026519775,
+          "throughput": 166.78697601857445,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 2.9593749999999996,
+          "avg_memory_mb": 558.953125,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 2
+        },
+        {
+          "stream_index": 2,
+          "duration": 6.831777095794678,
+          "throughput": 165.68282011065105,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 1.5593750000000002,
+          "avg_memory_mb": 561.8017578125,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 2
+        },
+        {
+          "stream_index": 3,
+          "duration": 6.779640197753906,
+          "throughput": 167.1295868496639,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 1.18125,
+          "avg_memory_mb": 567.7041015625,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 2
+        },
+        {
+          "stream_index": 4,
+          "duration": 6.842231035232544,
+          "throughput": 165.35189765987647,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 5.034375,
+          "avg_memory_mb": 563.314453125,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 2
+        },
+        {
+          "stream_index": 5,
+          "duration": 6.961681842803955,
+          "throughput": 162.3908896718672,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 3.9468750000000004,
+          "avg_memory_mb": 561.2919921875,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 2
+        },
+        {
+          "stream_index": 6,
+          "duration": 6.815810918807983,
+          "throughput": 166.09612387702666,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 1.590625,
+          "avg_memory_mb": 560.16259765625,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 2
+        },
+        {
+          "stream_index": 7,
+          "duration": 6.787399768829346,
+          "throughput": 166.88171919797222,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 3.9687500000000004,
+          "avg_memory_mb": 560.17724609375,
+          "strategy": "sharded",
+          "nodes": 1,
+          "iteration": 2
+        }
+      ]
+    },
+    {
+      "strategy": "sharded",
+      "nodes": 2,
+      "iteration": 0,
+      "total_duration": 62.90170383453369,
+      "avg_throughput": 171.950802297471,
+      "avg_cpu_percent": 14.949609375,
+      "avg_memory_mb": 559.8214111328125,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 6.561628103256226,
+          "throughput": 173.47925269859806,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 12.115625000000001,
+          "avg_memory_mb": 558.06396484375,
           "strategy": "sharded",
           "nodes": 2,
           "iteration": 0
         },
         {
           "stream_index": 1,
-          "duration": 6.914620876312256,
-          "throughput": 164.00032954091486,
+          "duration": 6.638402938842773,
+          "throughput": 171.22915332055155,
           "total_inferences": 1000,
-          "avg_cpu_percent": 14.159375,
-          "avg_memory_mb": 437.70458984375,
+          "avg_cpu_percent": 20.165625,
+          "avg_memory_mb": 555.3154296875,
           "strategy": "sharded",
           "nodes": 2,
           "iteration": 0
+        },
+        {
+          "stream_index": 2,
+          "duration": 6.549079656600952,
+          "throughput": 173.93442716086562,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 17.121875,
+          "avg_memory_mb": 557.91650390625,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 0
+        },
+        {
+          "stream_index": 3,
+          "duration": 6.613296985626221,
+          "throughput": 171.97291487600992,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 18.346874999999997,
+          "avg_memory_mb": 561.90673828125,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 0
+        },
+        {
+          "stream_index": 4,
+          "duration": 6.631463289260864,
+          "throughput": 171.35808146460747,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 9.309375,
+          "avg_memory_mb": 560.52099609375,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 0
+        },
+        {
+          "stream_index": 5,
+          "duration": 6.650338172912598,
+          "throughput": 170.8008415139269,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 13.662500000000001,
+          "avg_memory_mb": 564.71630859375,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 0
+        },
+        {
+          "stream_index": 6,
+          "duration": 6.580495119094849,
+          "throughput": 172.83228843445158,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 13.890625,
+          "avg_memory_mb": 563.57373046875,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 0
+        },
+        {
+          "stream_index": 7,
+          "duration": 6.67664098739624,
+          "throughput": 169.99945891075694,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 14.984375,
+          "avg_memory_mb": 556.5576171875,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 0
+        }
+      ]
+    },
+    {
+      "strategy": "sharded",
+      "nodes": 2,
+      "iteration": 1,
+      "total_duration": 63.15694499015808,
+      "avg_throughput": 170.73667144396978,
+      "avg_cpu_percent": 15.650390625,
+      "avg_memory_mb": 547.2518920898438,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 6.769594669342041,
+          "throughput": 167.3674654684972,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 6.30625,
+          "avg_memory_mb": 545.8740234375,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 1
+        },
+        {
+          "stream_index": 1,
+          "duration": 6.563688278198242,
+          "throughput": 173.35553258552278,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 15.9375,
+          "avg_memory_mb": 527.578125,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 1
+        },
+        {
+          "stream_index": 2,
+          "duration": 6.715245246887207,
+          "throughput": 168.97166279874222,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 15.4625,
+          "avg_memory_mb": 565.08837890625,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 1
+        },
+        {
+          "stream_index": 3,
+          "duration": 6.4493019580841064,
+          "throughput": 176.83847031390727,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 16.06875,
+          "avg_memory_mb": 560.65283203125,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 1
+        },
+        {
+          "stream_index": 4,
+          "duration": 6.600940942764282,
+          "throughput": 172.27344459731887,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 20.1,
+          "avg_memory_mb": 561.21337890625,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 1
+        },
+        {
+          "stream_index": 5,
+          "duration": 6.691115140914917,
+          "throughput": 169.65919782094744,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 25.725,
+          "avg_memory_mb": 530.55126953125,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 1
+        },
+        {
+          "stream_index": 6,
+          "duration": 6.858080148696899,
+          "throughput": 164.9313948496217,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 17.203125,
+          "avg_memory_mb": 561.84716796875,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 1
+        },
+        {
+          "stream_index": 7,
+          "duration": 6.594854831695557,
+          "throughput": 172.4962031172008,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 8.4,
+          "avg_memory_mb": 525.2099609375,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 1
+        }
+      ]
+    },
+    {
+      "strategy": "sharded",
+      "nodes": 2,
+      "iteration": 2,
+      "total_duration": 63.3046669960022,
+      "avg_throughput": 170.73653119081382,
+      "avg_cpu_percent": 13.819921875,
+      "avg_memory_mb": 523.7406616210938,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 6.729568004608154,
+          "throughput": 168.62044223114106,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 9.74375,
+          "avg_memory_mb": 551.2734375,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 2
+        },
+        {
+          "stream_index": 1,
+          "duration": 6.635219097137451,
+          "throughput": 171.32269959679996,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 17.3625,
+          "avg_memory_mb": 536.310546875,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 2
+        },
+        {
+          "stream_index": 2,
+          "duration": 6.481955289840698,
+          "throughput": 175.9736808772806,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 9.287500000000001,
+          "avg_memory_mb": 544.3955078125,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 2
+        },
+        {
+          "stream_index": 3,
+          "duration": 6.69227409362793,
+          "throughput": 169.6435728957855,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 12.162500000000001,
+          "avg_memory_mb": 549.681640625,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 2
+        },
+        {
+          "stream_index": 4,
+          "duration": 6.622509956359863,
+          "throughput": 171.69100021220353,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 10.528125,
+          "avg_memory_mb": 564.8232421875,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 2
+        },
+        {
+          "stream_index": 5,
+          "duration": 6.655153274536133,
+          "throughput": 170.73138564406983,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 9.146875,
+          "avg_memory_mb": 521.2783203125,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 2
+        },
+        {
+          "stream_index": 6,
+          "duration": 6.601655960083008,
+          "throughput": 172.29395984198575,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 23.634375,
+          "avg_memory_mb": 462.5400390625,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 2
+        },
+        {
+          "stream_index": 7,
+          "duration": 6.837138891220093,
+          "throughput": 165.6155082272445,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 18.69375,
+          "avg_memory_mb": 459.62255859375,
+          "strategy": "sharded",
+          "nodes": 2,
+          "iteration": 2
+        }
+      ]
+    },
+    {
+      "strategy": "sharded",
+      "nodes": 4,
+      "iteration": 0,
+      "total_duration": 67.13288307189941,
+      "avg_throughput": 157.69642606330638,
+      "avg_cpu_percent": 27.636328125,
+      "avg_memory_mb": 412.2340087890625,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 7.113749027252197,
+          "throughput": 158.31313986861792,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 23.334375,
+          "avg_memory_mb": 440.599609375,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 0
+        },
+        {
+          "stream_index": 1,
+          "duration": 7.067703723907471,
+          "throughput": 159.44574381237402,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 26.946875,
+          "avg_memory_mb": 447.779296875,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 0
+        },
+        {
+          "stream_index": 2,
+          "duration": 7.033524990081787,
+          "throughput": 160.40984843553602,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 33.359375,
+          "avg_memory_mb": 407.95361328125,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 0
+        },
+        {
+          "stream_index": 3,
+          "duration": 7.216654300689697,
+          "throughput": 155.8020678569493,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 28.2625,
+          "avg_memory_mb": 405.10107421875,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 0
+        },
+        {
+          "stream_index": 4,
+          "duration": 7.1188108921051025,
+          "throughput": 158.2621613995549,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 33.80625,
+          "avg_memory_mb": 404.6181640625,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 0
+        },
+        {
+          "stream_index": 5,
+          "duration": 7.168117046356201,
+          "throughput": 157.0083989661855,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 28.8875,
+          "avg_memory_mb": 392.533203125,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 0
+        },
+        {
+          "stream_index": 6,
+          "duration": 7.199264049530029,
+          "throughput": 156.27859450671,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 26.896874999999998,
+          "avg_memory_mb": 403.078125,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 0
+        },
+        {
+          "stream_index": 7,
+          "duration": 7.205377101898193,
+          "throughput": 156.05145366052355,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 19.596875,
+          "avg_memory_mb": 396.208984375,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 0
+        }
+      ]
+    },
+    {
+      "strategy": "sharded",
+      "nodes": 4,
+      "iteration": 1,
+      "total_duration": 67.24821877479553,
+      "avg_throughput": 157.2951291365349,
+      "avg_cpu_percent": 25.818359375,
+      "avg_memory_mb": 427.0802001953125,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 7.0974647998809814,
+          "throughput": 158.74938472040049,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 17.9875,
+          "avg_memory_mb": 413.45166015625,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 1
+        },
+        {
+          "stream_index": 1,
+          "duration": 7.173552989959717,
+          "throughput": 156.86077984225525,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 26.987499999999997,
+          "avg_memory_mb": 403.8837890625,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 1
+        },
+        {
+          "stream_index": 2,
+          "duration": 7.105834007263184,
+          "throughput": 158.52018638869114,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 19.375,
+          "avg_memory_mb": 448.7236328125,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 1
+        },
+        {
+          "stream_index": 3,
+          "duration": 7.067480802536011,
+          "throughput": 159.39892793938688,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 26.231250000000003,
+          "avg_memory_mb": 464.6845703125,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 1
+        },
+        {
+          "stream_index": 4,
+          "duration": 7.136690139770508,
+          "throughput": 157.72532196910868,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 23.440625000000004,
+          "avg_memory_mb": 439.26708984375,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 1
+        },
+        {
+          "stream_index": 5,
+          "duration": 7.230096817016602,
+          "throughput": 155.4390419600888,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 23.146874999999998,
+          "avg_memory_mb": 415.14013671875,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 1
+        },
+        {
+          "stream_index": 6,
+          "duration": 7.267515182495117,
+          "throughput": 154.54555771574493,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 28.312500000000004,
+          "avg_memory_mb": 405.5068359375,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 1
+        },
+        {
+          "stream_index": 7,
+          "duration": 7.160884857177734,
+          "throughput": 157.12183255660312,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 41.065625,
+          "avg_memory_mb": 425.98388671875,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 1
+        }
+      ]
+    },
+    {
+      "strategy": "sharded",
+      "nodes": 4,
+      "iteration": 2,
+      "total_duration": 67.5603539943695,
+      "avg_throughput": 156.58381126409716,
+      "avg_cpu_percent": 24.649609374999997,
+      "avg_memory_mb": 403.5545654296875,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 7.159595012664795,
+          "throughput": 157.13245144485253,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 23.35,
+          "avg_memory_mb": 403.04833984375,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 2
+        },
+        {
+          "stream_index": 1,
+          "duration": 7.193588972091675,
+          "throughput": 156.2871138690438,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 30.321875,
+          "avg_memory_mb": 404.353515625,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 2
+        },
+        {
+          "stream_index": 2,
+          "duration": 7.205787897109985,
+          "throughput": 155.9968210791847,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 28.36875,
+          "avg_memory_mb": 398.85791015625,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 2
+        },
+        {
+          "stream_index": 3,
+          "duration": 7.126171827316284,
+          "throughput": 157.94879380530114,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 27.696875,
+          "avg_memory_mb": 411.2177734375,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 2
+        },
+        {
+          "stream_index": 4,
+          "duration": 7.2115960121154785,
+          "throughput": 155.9934386342898,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 18.20625,
+          "avg_memory_mb": 398.42578125,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 2
+        },
+        {
+          "stream_index": 5,
+          "duration": 7.17155909538269,
+          "throughput": 156.88364438604106,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 27.603125,
+          "avg_memory_mb": 411.03955078125,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 2
+        },
+        {
+          "stream_index": 6,
+          "duration": 7.179700136184692,
+          "throughput": 156.64016338394117,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 17.359375,
+          "avg_memory_mb": 404.29345703125,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 2
+        },
+        {
+          "stream_index": 7,
+          "duration": 7.217895030975342,
+          "throughput": 155.78806351012312,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 24.290625,
+          "avg_memory_mb": 397.2001953125,
+          "strategy": "sharded",
+          "nodes": 4,
+          "iteration": 2
+        }
+      ]
+    },
+    {
+      "strategy": "sharded",
+      "nodes": 8,
+      "iteration": 0,
+      "total_duration": 94.05537295341492,
+      "avg_throughput": 103.58412904039596,
+      "avg_cpu_percent": 31.763281250000002,
+      "avg_memory_mb": 266.57452392578125,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 10.348119020462036,
+          "throughput": 104.72965178441498,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 35.378125,
+          "avg_memory_mb": 272.72021484375,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 0
+        },
+        {
+          "stream_index": 1,
+          "duration": 9.880990028381348,
+          "throughput": 110.08787782779551,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 31.25,
+          "avg_memory_mb": 284.17138671875,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 0
+        },
+        {
+          "stream_index": 2,
+          "duration": 10.269165754318237,
+          "throughput": 105.58794654686736,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 40.625,
+          "avg_memory_mb": 262.1845703125,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 0
+        },
+        {
+          "stream_index": 3,
+          "duration": 11.110349178314209,
+          "throughput": 96.99967343035019,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 21.875,
+          "avg_memory_mb": 240.74169921875,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 0
+        },
+        {
+          "stream_index": 4,
+          "duration": 10.380661964416504,
+          "throughput": 104.35410189377274,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 37.5,
+          "avg_memory_mb": 285.138671875,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 0
+        },
+        {
+          "stream_index": 5,
+          "duration": 10.345715761184692,
+          "throughput": 104.7475574535172,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 25.0,
+          "avg_memory_mb": 273.9658203125,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 0
+        },
+        {
+          "stream_index": 6,
+          "duration": 10.04548192024231,
+          "throughput": 108.17633362608979,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 25.0,
+          "avg_memory_mb": 277.7880859375,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 0
+        },
+        {
+          "stream_index": 7,
+          "duration": 11.438565254211426,
+          "throughput": 93.98988976035996,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 37.478125,
+          "avg_memory_mb": 235.8857421875,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 0
+        }
+      ]
+    },
+    {
+      "strategy": "sharded",
+      "nodes": 8,
+      "iteration": 1,
+      "total_duration": 97.18626689910889,
+      "avg_throughput": 100.19407659538052,
+      "avg_cpu_percent": 32.93828125,
+      "avg_memory_mb": 282.94268798828125,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 12.698148012161255,
+          "throughput": 84.66485784177749,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 43.75,
+          "avg_memory_mb": 277.373046875,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 1
+        },
+        {
+          "stream_index": 1,
+          "duration": 10.879220008850098,
+          "throughput": 99.27061739032203,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 37.5,
+          "avg_memory_mb": 293.2353515625,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 1
+        },
+        {
+          "stream_index": 2,
+          "duration": 10.024931907653809,
+          "throughput": 108.38023397374329,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 27.625,
+          "avg_memory_mb": 318.36279296875,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 1
+        },
+        {
+          "stream_index": 3,
+          "duration": 9.993925333023071,
+          "throughput": 108.74271626980094,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 28.125,
+          "avg_memory_mb": 318.73583984375,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 1
+        },
+        {
+          "stream_index": 4,
+          "duration": 10.350551128387451,
+          "throughput": 104.69802189248203,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 31.115625,
+          "avg_memory_mb": 271.2724609375,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 1
+        },
+        {
+          "stream_index": 5,
+          "duration": 10.836097955703735,
+          "throughput": 99.6704791545058,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 34.375,
+          "avg_memory_mb": 253.2568359375,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 1
+        },
+        {
+          "stream_index": 6,
+          "duration": 11.192795753479004,
+          "throughput": 96.2266426984712,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 28.125,
+          "avg_memory_mb": 272.1533203125,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 1
+        },
+        {
+          "stream_index": 7,
+          "duration": 10.807995080947876,
+          "throughput": 99.89904354194135,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 32.890625,
+          "avg_memory_mb": 259.15185546875,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 1
+        }
+      ]
+    },
+    {
+      "strategy": "sharded",
+      "nodes": 8,
+      "iteration": 2,
+      "total_duration": 98.05929803848267,
+      "avg_throughput": 98.58544234353656,
+      "avg_cpu_percent": 36.775781249999994,
+      "avg_memory_mb": 269.79510498046875,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 11.296325206756592,
+          "throughput": 95.33858348544008,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 31.25,
+          "avg_memory_mb": 256.36669921875,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 2
+        },
+        {
+          "stream_index": 1,
+          "duration": 10.266338109970093,
+          "throughput": 105.63018445058077,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 32.88125,
+          "avg_memory_mb": 298.50341796875,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 2
+        },
+        {
+          "stream_index": 2,
+          "duration": 11.062445163726807,
+          "throughput": 97.40381901657094,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 46.875,
+          "avg_memory_mb": 260.08203125,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 2
+        },
+        {
+          "stream_index": 3,
+          "duration": 11.439618110656738,
+          "throughput": 93.95532897998207,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 34.375,
+          "avg_memory_mb": 266.97412109375,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 2
+        },
+        {
+          "stream_index": 4,
+          "duration": 10.867923259735107,
+          "throughput": 99.32088289249566,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 39.93125,
+          "avg_memory_mb": 247.99609375,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 2
+        },
+        {
+          "stream_index": 5,
+          "duration": 11.241460084915161,
+          "throughput": 95.83390797522519,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 33.89375,
+          "avg_memory_mb": 261.9658203125,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 2
+        },
+        {
+          "stream_index": 6,
+          "duration": 10.559191942214966,
+          "throughput": 102.4734100896548,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 28.125,
+          "avg_memory_mb": 300.2568359375,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 2
+        },
+        {
+          "stream_index": 7,
+          "duration": 10.936792135238647,
+          "throughput": 98.72742185834286,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 46.875,
+          "avg_memory_mb": 266.2158203125,
+          "strategy": "sharded",
+          "nodes": 8,
+          "iteration": 2
+        }
+      ]
+    },
+    {
+      "strategy": "sharded",
+      "nodes": 16,
+      "iteration": 0,
+      "total_duration": 457.19742798805237,
+      "avg_throughput": 19.017519850019013,
+      "avg_cpu_percent": 47.483203125,
+      "avg_memory_mb": 134.6494140625,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 42.524434089660645,
+          "throughput": 23.98101193713293,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 55.078125,
+          "avg_memory_mb": 129.2890625,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 0
+        },
+        {
+          "stream_index": 1,
+          "duration": 61.36921715736389,
+          "throughput": 16.524018920749878,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 50.65,
+          "avg_memory_mb": 132.54736328125,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 0
+        },
+        {
+          "stream_index": 2,
+          "duration": 55.03694820404053,
+          "throughput": 18.4512729041224,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 34.746875,
+          "avg_memory_mb": 146.3115234375,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 0
+        },
+        {
+          "stream_index": 3,
+          "duration": 50.61703610420227,
+          "throughput": 20.095112559281016,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 42.96875,
+          "avg_memory_mb": 149.88720703125,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 0
+        },
+        {
+          "stream_index": 4,
+          "duration": 55.40958070755005,
+          "throughput": 18.37153193262059,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 48.66875,
+          "avg_memory_mb": 138.173828125,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 0
+        },
+        {
+          "stream_index": 5,
+          "duration": 80.1672260761261,
+          "throughput": 12.60476845421855,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 48.778125,
+          "avg_memory_mb": 102.822265625,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 0
+        },
+        {
+          "stream_index": 6,
+          "duration": 60.73590087890625,
+          "throughput": 16.696668599210433,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 58.740625,
+          "avg_memory_mb": 108.3046875,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 0
+        },
+        {
+          "stream_index": 7,
+          "duration": 40.18281173706055,
+          "throughput": 25.415773492816317,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 40.234375,
+          "avg_memory_mb": 169.859375,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 0
+        }
+      ]
+    },
+    {
+      "strategy": "sharded",
+      "nodes": 16,
+      "iteration": 1,
+      "total_duration": 369.6160569190979,
+      "avg_throughput": 23.71596280760154,
+      "avg_cpu_percent": 45.323046875,
+      "avg_memory_mb": 158.3399658203125,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 36.882213830947876,
+          "throughput": 27.73154462275198,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 44.5125,
+          "avg_memory_mb": 187.6044921875,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 1
+        },
+        {
+          "stream_index": 1,
+          "duration": 40.01997995376587,
+          "throughput": 25.510768985308687,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 50.0,
+          "avg_memory_mb": 207.74951171875,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 1
+        },
+        {
+          "stream_index": 2,
+          "duration": 65.12816095352173,
+          "throughput": 15.566446057420606,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 65.625,
+          "avg_memory_mb": 141.986328125,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 1
+        },
+        {
+          "stream_index": 3,
+          "duration": 46.33978891372681,
+          "throughput": 21.99794441644027,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 40.625,
+          "avg_memory_mb": 150.85693359375,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 1
+        },
+        {
+          "stream_index": 4,
+          "duration": 38.45026922225952,
+          "throughput": 26.57196212070727,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 37.5,
+          "avg_memory_mb": 159.048828125,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 1
+        },
+        {
+          "stream_index": 5,
+          "duration": 34.79725003242493,
+          "throughput": 29.419358317713996,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 59.140625,
+          "avg_memory_mb": 147.880859375,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 1
+        },
+        {
+          "stream_index": 6,
+          "duration": 55.462984800338745,
+          "throughput": 18.352992241338235,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 38.30625,
+          "avg_memory_mb": 112.6923828125,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 1
+        },
+        {
+          "stream_index": 7,
+          "duration": 41.51004695892334,
+          "throughput": 24.576685699131275,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 26.875,
+          "avg_memory_mb": 158.900390625,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 1
+        }
+      ]
+    },
+    {
+      "strategy": "sharded",
+      "nodes": 16,
+      "iteration": 2,
+      "total_duration": 387.01712584495544,
+      "avg_throughput": 23.539861094736708,
+      "avg_cpu_percent": 50.43515625,
+      "avg_memory_mb": 164.38775634765625,
+      "total_inferences": 8000,
+      "successful_streams": 8,
+      "failed_streams": 0,
+      "stream_results": [
+        {
+          "stream_index": 0,
+          "duration": 61.53077983856201,
+          "throughput": 16.488583672583108,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 40.421875,
+          "avg_memory_mb": 126.94287109375,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 2
+        },
+        {
+          "stream_index": 1,
+          "duration": 39.93071508407593,
+          "throughput": 25.562052116393346,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 59.375,
+          "avg_memory_mb": 178.63232421875,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 2
+        },
+        {
+          "stream_index": 2,
+          "duration": 32.32390904426575,
+          "throughput": 31.74734229136919,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 49.474999999999994,
+          "avg_memory_mb": 189.7919921875,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 2
+        },
+        {
+          "stream_index": 3,
+          "duration": 53.93550086021423,
+          "throughput": 18.94283508732522,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 38.753125,
+          "avg_memory_mb": 145.86279296875,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 2
+        },
+        {
+          "stream_index": 4,
+          "duration": 34.036818981170654,
+          "throughput": 30.09502975708434,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 55.528125,
+          "avg_memory_mb": 160.11328125,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 2
+        },
+        {
+          "stream_index": 5,
+          "duration": 35.31438708305359,
+          "throughput": 28.98136983997128,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 50.859375,
+          "avg_memory_mb": 153.060546875,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 2
+        },
+        {
+          "stream_index": 6,
+          "duration": 49.34651708602905,
+          "throughput": 22.027558722126358,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 72.50625,
+          "avg_memory_mb": 159.38134765625,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 2
+        },
+        {
+          "stream_index": 7,
+          "duration": 69.98167824745178,
+          "throughput": 14.474117271040805,
+          "total_inferences": 1000,
+          "avg_cpu_percent": 36.5625,
+          "avg_memory_mb": 201.31689453125,
+          "strategy": "sharded",
+          "nodes": 16,
+          "iteration": 2
         }
       ]
     }
@@ -236,66 +4613,156 @@
   "averaged_results": {
     "uniform": {
       "1": {
-        "avg_throughput": 377.4823911155176,
-        "avg_cpu_percent": 33.8,
-        "avg_memory_mb": 667.703125,
-        "avg_duration": 7.420971870422363,
-        "total_inferences": 2000,
-        "successful_streams": 2,
+        "avg_throughput": 389.31695696476703,
+        "avg_cpu_percent": 36.11666666666667,
+        "avg_memory_mb": 586.953125,
+        "avg_duration": 31.987671375274658,
+        "total_inferences": 24000,
+        "successful_streams": 24,
         "failed_streams": 0,
         "success_rate": 1.0
       },
       "2": {
-        "avg_throughput": 364.7829350364286,
-        "avg_cpu_percent": 42.45,
-        "avg_memory_mb": 592.8359375,
-        "avg_duration": 7.6997230052948,
-        "total_inferences": 2000,
-        "successful_streams": 2,
+        "avg_throughput": 388.5409443348619,
+        "avg_cpu_percent": 37.675000000000004,
+        "avg_memory_mb": 558.181640625,
+        "avg_duration": 32.03301374117533,
+        "total_inferences": 24000,
+        "successful_streams": 24,
+        "failed_streams": 0,
+        "success_rate": 1.0
+      },
+      "4": {
+        "avg_throughput": 371.0238185762316,
+        "avg_cpu_percent": 39.545833333333334,
+        "avg_memory_mb": 520.9153645833334,
+        "avg_duration": 33.19075234731039,
+        "total_inferences": 24000,
+        "successful_streams": 24,
+        "failed_streams": 0,
+        "success_rate": 1.0
+      },
+      "8": {
+        "avg_throughput": 356.56777167240404,
+        "avg_cpu_percent": 40.67083333333333,
+        "avg_memory_mb": 527.5846354166666,
+        "avg_duration": 34.33591119448344,
+        "total_inferences": 24000,
+        "successful_streams": 24,
+        "failed_streams": 0,
+        "success_rate": 1.0
+      },
+      "16": {
+        "avg_throughput": 345.53349268861604,
+        "avg_cpu_percent": 43.104166666666664,
+        "avg_memory_mb": 511.15625,
+        "avg_duration": 35.07381137212118,
+        "total_inferences": 24000,
+        "successful_streams": 24,
         "failed_streams": 0,
         "success_rate": 1.0
       }
     },
     "dynamic": {
       "1": {
-        "avg_throughput": 116.54467937630852,
-        "avg_cpu_percent": 22.2421875,
-        "avg_memory_mb": 388.82275390625,
-        "avg_duration": 29.98773503303528,
-        "total_inferences": 2000,
-        "successful_streams": 2,
+        "avg_throughput": 117.27746662116972,
+        "avg_cpu_percent": 27.630598958333337,
+        "avg_memory_mb": 348.8975423177083,
+        "avg_duration": 118.58012461662292,
+        "total_inferences": 24000,
+        "successful_streams": 24,
         "failed_streams": 0,
         "success_rate": 1.0
       },
       "2": {
-        "avg_throughput": 205.45772905585105,
-        "avg_cpu_percent": 32.065625,
-        "avg_memory_mb": 333.5439453125,
-        "avg_duration": 21.53297209739685,
-        "total_inferences": 2000,
-        "successful_streams": 2,
+        "avg_throughput": 183.4108726750097,
+        "avg_cpu_percent": 34.48294270833333,
+        "avg_memory_mb": 376.5065104166667,
+        "avg_duration": 91.67156322797139,
+        "total_inferences": 24000,
+        "successful_streams": 24,
+        "failed_streams": 0,
+        "success_rate": 1.0
+      },
+      "4": {
+        "avg_throughput": 257.8935858290868,
+        "avg_cpu_percent": 56.05364583333333,
+        "avg_memory_mb": 267.67641194661456,
+        "avg_duration": 85.13533226648967,
+        "total_inferences": 24000,
+        "successful_streams": 24,
+        "failed_streams": 0,
+        "success_rate": 1.0
+      },
+      "8": {
+        "avg_throughput": 330.853204038264,
+        "avg_cpu_percent": 80.69739583333333,
+        "avg_memory_mb": 235.59429931640625,
+        "avg_duration": 101.92302831013997,
+        "total_inferences": 24000,
+        "successful_streams": 24,
+        "failed_streams": 0,
+        "success_rate": 1.0
+      },
+      "16": {
+        "avg_throughput": 211.19247619287364,
+        "avg_cpu_percent": 97.90208333333332,
+        "avg_memory_mb": 213.85441080729166,
+        "avg_duration": 166.1517006556193,
+        "total_inferences": 24000,
+        "successful_streams": 24,
         "failed_streams": 0,
         "success_rate": 1.0
       }
     },
     "sharded": {
       "1": {
-        "avg_throughput": 151.00043135992993,
-        "avg_cpu_percent": 4.2046874999999995,
-        "avg_memory_mb": 533.57421875,
-        "avg_duration": 16.939395904541016,
-        "total_inferences": 2000,
-        "successful_streams": 2,
+        "avg_throughput": 163.84477409006593,
+        "avg_cpu_percent": 2.976692708333333,
+        "avg_memory_mb": 561.1392008463541,
+        "avg_duration": 65.48831303914388,
+        "total_inferences": 24000,
+        "successful_streams": 24,
         "failed_streams": 0,
         "success_rate": 1.0
       },
       "2": {
-        "avg_throughput": 165.5017932527296,
-        "avg_cpu_percent": 15.4390625,
-        "avg_memory_mb": 466.93701171875,
-        "avg_duration": 15.47360610961914,
-        "total_inferences": 2000,
-        "successful_streams": 2,
+        "avg_throughput": 171.14133497741818,
+        "avg_cpu_percent": 14.806640625,
+        "avg_memory_mb": 543.6046549479166,
+        "avg_duration": 63.12110527356466,
+        "total_inferences": 24000,
+        "successful_streams": 24,
+        "failed_streams": 0,
+        "success_rate": 1.0
+      },
+      "4": {
+        "avg_throughput": 157.19178882131283,
+        "avg_cpu_percent": 26.034765624999995,
+        "avg_memory_mb": 414.2895914713542,
+        "avg_duration": 67.31381861368816,
+        "total_inferences": 24000,
+        "successful_streams": 24,
+        "failed_streams": 0,
+        "success_rate": 1.0
+      },
+      "8": {
+        "avg_throughput": 100.78788265977101,
+        "avg_cpu_percent": 33.82578125,
+        "avg_memory_mb": 273.10410563151044,
+        "avg_duration": 96.43364596366882,
+        "total_inferences": 24000,
+        "successful_streams": 24,
+        "failed_streams": 0,
+        "success_rate": 1.0
+      },
+      "16": {
+        "avg_throughput": 22.091114584119087,
+        "avg_cpu_percent": 47.74713541666667,
+        "avg_memory_mb": 152.45904541015625,
+        "avg_duration": 404.6102035840352,
+        "total_inferences": 24000,
+        "successful_streams": 24,
         "failed_streams": 0,
         "success_rate": 1.0
       }
@@ -305,51 +4772,99 @@
     "best_throughput": {
       "1": {
         "strategy": "uniform",
-        "throughput": 377.4823911155176
+        "throughput": 389.31695696476703
       },
       "2": {
         "strategy": "uniform",
-        "throughput": 364.7829350364286
+        "throughput": 388.5409443348619
+      },
+      "4": {
+        "strategy": "uniform",
+        "throughput": 371.0238185762316
+      },
+      "8": {
+        "strategy": "uniform",
+        "throughput": 356.56777167240404
+      },
+      "16": {
+        "strategy": "uniform",
+        "throughput": 345.53349268861604
       }
     },
     "best_efficiency": {},
     "scaling_analysis": {
       "uniform": {
-        "scaling_efficiency": 0.48317874372687936,
+        "scaling_efficiency": 0.22680314538389196,
         "scaling_data": [
           {
             "nodes": 1,
-            "throughput": 377.4823911155176
+            "throughput": 389.31695696476703
           },
           {
             "nodes": 2,
-            "throughput": 364.7829350364286
+            "throughput": 388.5409443348619
+          },
+          {
+            "nodes": 4,
+            "throughput": 371.0238185762316
+          },
+          {
+            "nodes": 8,
+            "throughput": 356.56777167240404
+          },
+          {
+            "nodes": 16,
+            "throughput": 345.53349268861604
           }
         ]
       },
       "dynamic": {
-        "scaling_efficiency": 0.8814547783535152,
+        "scaling_efficiency": 0.44922315243714184,
         "scaling_data": [
           {
             "nodes": 1,
-            "throughput": 116.54467937630852
+            "throughput": 117.27746662116972
           },
           {
             "nodes": 2,
-            "throughput": 205.45772905585105
+            "throughput": 183.4108726750097
+          },
+          {
+            "nodes": 4,
+            "throughput": 257.8935858290868
+          },
+          {
+            "nodes": 8,
+            "throughput": 330.853204038264
+          },
+          {
+            "nodes": 16,
+            "throughput": 211.19247619287364
           }
         ]
       },
       "sharded": {
-        "scaling_efficiency": 0.5480176174405545,
+        "scaling_efficiency": 0.21185874779822259,
         "scaling_data": [
           {
             "nodes": 1,
-            "throughput": 151.00043135992993
+            "throughput": 163.84477409006593
           },
           {
             "nodes": 2,
-            "throughput": 165.5017932527296
+            "throughput": 171.14133497741818
+          },
+          {
+            "nodes": 4,
+            "throughput": 157.19178882131283
+          },
+          {
+            "nodes": 8,
+            "throughput": 100.78788265977101
+          },
+          {
+            "nodes": 16,
+            "throughput": 22.091114584119087
           }
         ]
       }

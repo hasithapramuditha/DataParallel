@@ -2,51 +2,99 @@
   "best_throughput": {
     "1": {
       "strategy": "uniform",
-      "throughput": 377.4823911155176
+      "throughput": 389.31695696476703
     },
     "2": {
       "strategy": "uniform",
-      "throughput": 364.7829350364286
+      "throughput": 388.5409443348619
+    },
+    "4": {
+      "strategy": "uniform",
+      "throughput": 371.0238185762316
+    },
+    "8": {
+      "strategy": "uniform",
+      "throughput": 356.56777167240404
+    },
+    "16": {
+      "strategy": "uniform",
+      "throughput": 345.53349268861604
     }
   },
   "best_efficiency": {},
   "scaling_analysis": {
     "uniform": {
-      "scaling_efficiency": 0.48317874372687936,
+      "scaling_efficiency": 0.22680314538389196,
       "scaling_data": [
         {
           "nodes": 1,
-          "throughput": 377.4823911155176
+          "throughput": 389.31695696476703
         },
         {
           "nodes": 2,
-          "throughput": 364.7829350364286
+          "throughput": 388.5409443348619
+        },
+        {
+          "nodes": 4,
+          "throughput": 371.0238185762316
+        },
+        {
+          "nodes": 8,
+          "throughput": 356.56777167240404
+        },
+        {
+          "nodes": 16,
+          "throughput": 345.53349268861604
         }
       ]
     },
     "dynamic": {
-      "scaling_efficiency": 0.8814547783535152,
+      "scaling_efficiency": 0.44922315243714184,
       "scaling_data": [
         {
           "nodes": 1,
-          "throughput": 116.54467937630852
+          "throughput": 117.27746662116972
         },
         {
           "nodes": 2,
-          "throughput": 205.45772905585105
+          "throughput": 183.4108726750097
+        },
+        {
+          "nodes": 4,
+          "throughput": 257.8935858290868
+        },
+        {
+          "nodes": 8,
+          "throughput": 330.853204038264
+        },
+        {
+          "nodes": 16,
+          "throughput": 211.19247619287364
         }
       ]
     },
     "sharded": {
-      "scaling_efficiency": 0.5480176174405545,
+      "scaling_efficiency": 0.21185874779822259,
       "scaling_data": [
         {
           "nodes": 1,
-          "throughput": 151.00043135992993
+          "throughput": 163.84477409006593
         },
         {
           "nodes": 2,
-          "throughput": 165.5017932527296
+          "throughput": 171.14133497741818
+        },
+        {
+          "nodes": 4,
+          "throughput": 157.19178882131283
+        },
+        {
+          "nodes": 8,
+          "throughput": 100.78788265977101
+        },
+        {
+          "nodes": 16,
+          "throughput": 22.091114584119087
         }
       ]
     }
